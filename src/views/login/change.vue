@@ -1,6 +1,6 @@
 <template>
 	<div class="change">
-		修改密码
+		修改密码2
 	</div>
 </template>
 <script lang="ts">
