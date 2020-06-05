@@ -41,9 +41,9 @@ export default class headerWarp extends Vue {
 	 * @prop
 	 */
 	@Prop({ default: "项目名称" }) private name!: string;
-	@Prop({ default: "请干点什么" }) private text!: string;
+	@Prop({ default: "" }) private text!: string;
 	@Prop({ default: "" }) private route!: string;
-	@Prop({ default: "想我" }) private maybe!: string;
+	@Prop({ default: "" }) private maybe!: string;
 	@Prop({ default: true }) private show!: boolean;
 
 	/**
