@@ -23,6 +23,12 @@ const routes: Array<RouteConfig> = [
 		component: () => import("@/views/login/change.vue"),
 	},
 	{
+		//修改密码
+		path: "/clause",
+		name: "clause",
+		component: () => import("@/views/login/clause.vue"),
+	},
+	{
 		path: "/",
 		name: "index",
 		component: () => import("@/views/layout/layout.vue"),
@@ -65,22 +71,22 @@ const router = new VueRouter({
 	linkExactActiveClass: "active",
 });
 
-// 路由守卫
-// router.beforeEach((to, from, next) => {
-// 	if (
-// 		to.path === "/login" ||
-// 		to.name === "register" ||
-// 		to.name === "changePassword"
-// 	) {
-// 		next();
-// 	} else {
-// 		let token = localStorage.getItem("Authorization");
-// 		if (token === null || token === "") {
-// 			next("/login");
-// 		} else {
-// 			next();
-// 		}
-// 	}
-// });
+// 路由守卫;
+router.beforeEach((to, from, next) => {
+	if (
+		to.path === "/login" ||
+		to.name === "register" ||
+		to.name === "changePassword"
+	) {
+		next();
+	} else {
+		let token = localStorage.getItem("Authorization");
+		if (token === null || token === "") {
+			next("/login");
+		} else {
+			next();
+		}
+	}
+});
 
 export default router;
