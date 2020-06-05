@@ -1,7 +1,7 @@
 <template>
-	<div class="change">
-		修改密码2
-	</div>
+	<el-container>
+		修改
+	</el-container>
 </template>
 <script lang="ts">
 import Vue from "vue";
