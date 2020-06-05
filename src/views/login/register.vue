@@ -1,7 +1,7 @@
 <template>
-	<div class="register">
+	<el-container>
 		注册
-	</div>
+	</el-container>
 </template>
 
 <script lang="ts">

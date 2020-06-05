@@ -1,52 +1,28 @@
 <template>
-	<div class="login">
-		<el-button type="primary" @click="onLogin">登录</el-button>
-		<el-button type="success" @click="onRegister">注册</el-button>
-		<el-button type="warning" @click="onChangePassword">修改密码</el-button>
-	</div>
+	<el-container class="login">
+		<HeaderWarp
+			name="大语文学习平台"
+			text="没有账号，请"
+			maybe="注册"
+			route="register"
+		/>
+	</el-container>
 </template>
 <script lang="ts">
 import { Component, Vue, Watch } from "vue-property-decorator";
+import HeaderWarp from "@/components/login-header/header.vue";
+
 @Component({
 	name: "login",
+	components: {
+		HeaderWarp,
+	},
 })
 export default class login extends Vue {
 	/**
 	 * vue2.6 javascript 写法
 	 * @methods 生命周期
 	 */
-	private onLogin() {
-		//登录成功去主页
-		this.$router.push({
-			name: "index",
-		});
-	}
-	private onRegister() {
-		//去注册账号
-		this.$router.push({
-			name: "register",
-		});
-	}
-	private onChangePassword() {
-		//去修改密码
-		this.$router.push({
-			name: "changePassword",
-		});
-	}
 }
 </script>
-<style lang="scss" scoped>
-.login {
-	width: 500px;
-	height: 500px;
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	display: flex;
-	justify-content: space-between;
-	.el-button {
-		height: 40px;
-	}
-}
-</style>
+<style lang="scss" scoped></style>
