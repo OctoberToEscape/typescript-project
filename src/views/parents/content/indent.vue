@@ -167,8 +167,6 @@ export default class indent extends Vue {
 	background: #ffffff;
 	.user_attribute {
 		width: 100%;
-		// height: 400px;
-		// height: 30px;
 		.order_type {
 			width: 100%;
 			span {
