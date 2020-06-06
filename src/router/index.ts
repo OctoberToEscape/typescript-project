@@ -31,14 +31,14 @@ const routes: Array<RouteConfig> = [
 	{
 		path: "/",
 		name: "index",
-		component: () => import("@/views/layout/layout.vue"),
+		component: () => import("@/views/parents/layout.vue"),
 		alias: "/home",
 		redirect: "table",
 
 		children: [
 			{
 				path: "table",
-				component: () => import("@/views/layout/content/table.vue"),
+				component: () => import("@/views/parents/content/table.vue"),
 				name: "table",
 				meta: {
 					title: "table",
@@ -47,7 +47,7 @@ const routes: Array<RouteConfig> = [
 			},
 			{
 				path: "test",
-				component: () => import("@/views/layout/content/test.vue"),
+				component: () => import("@/views/parents/content/test.vue"),
 				name: "test",
 				meta: {
 					title: "test",
