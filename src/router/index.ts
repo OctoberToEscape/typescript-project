@@ -33,24 +33,24 @@ const routes: Array<RouteConfig> = [
 		name: "index",
 		component: () => import("@/views/parents/layout.vue"),
 		alias: "/home",
-		redirect: "table",
+		redirect: "study",
 
 		children: [
 			{
-				path: "table",
-				component: () => import("@/views/parents/content/table.vue"),
-				name: "table",
+				path: "indent",
+				component: () => import("@/views/parents/content/indent.vue"),
+				name: "indent",
 				meta: {
-					title: "table",
+					title: "indent",
 					noCache: true,
 				},
 			},
 			{
-				path: "test",
-				component: () => import("@/views/parents/content/test.vue"),
-				name: "test",
+				path: "study",
+				component: () => import("@/views/parents/content/study.vue"),
+				name: "study",
 				meta: {
-					title: "test",
+					title: "study",
 					noCache: true,
 				},
 			},
