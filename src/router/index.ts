@@ -23,7 +23,7 @@ const routes: Array<RouteConfig> = [
 		component: () => import("@/views/login/change.vue"),
 	},
 	{
-		//修改密码
+		//服务协议
 		path: "/clause",
 		name: "clause",
 		component: () => import("@/views/login/clause.vue"),

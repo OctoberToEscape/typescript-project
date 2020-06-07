@@ -42,18 +42,16 @@
 
 		<!-- 支付弹窗 -->
 		<el-dialog
-			title="提示"
 			:visible.sync="dialogVisible"
-			width="30%"
 			:before-close="handleClose"
+			width="680px"
+			id="indent-dialog"
 		>
-			<span>这是一段信息</span>
-			<span slot="footer" class="dialog-footer">
-				<el-button @click="dialogVisible = false">取 消</el-button>
-				<el-button type="primary" @click="dialogVisible = false"
-					>确 定</el-button
-				>
-			</span>
+			<IndentPayDialog
+				:show="show"
+				:active="active"
+				@changeVal="changeVal"
+			></IndentPayDialog>
 		</el-dialog>
 	</div>
 </template>
@@ -62,8 +60,12 @@
 import { Component, Vue, Watch } from "vue-property-decorator";
 import { Dictionary } from "vue-router/types/router";
 import { getOrderLis } from "@/api/parents/indent";
+import IndentPayDialog from "@/components/pay-dialog/index.vue";
 @Component({
 	name: "indent",
+	components: {
+		IndentPayDialog,
+	},
 })
 export default class indent extends Vue {
 	/**
@@ -111,6 +113,9 @@ export default class indent extends Vue {
 	//弹框
 	private dialogVisible: boolean = false;
 
+	private show: boolean = true;
+	private active: number = 0;
+
 	created() {
 		// 用户当前属性
 		this.user_order_type.type = this.$route.query.type;
@@ -147,12 +152,20 @@ export default class indent extends Vue {
 	}
 
 	//关闭弹窗
-	private handleClose(done: Function) {
-		this.$confirm("确认关闭？")
-			.then((_) => {
-				done();
-			})
-			.catch((_) => {});
+	private handleClose(): void {
+		this.dialogVisible = false;
+		setTimeout((): void => {
+			this.show = true;
+			this.active = 0;
+		}, 300);
+	}
+
+	//帮助子组件改变数值
+	private changeVal(val: boolean): void {
+		if (!val) {
+			this.active = 1;
+			this.show = false;
+		}
 	}
 }
 </script>
@@ -210,6 +223,10 @@ export default class indent extends Vue {
 		span {
 			margin-left: 5px;
 		}
+	}
+	// 支付弹窗
+	.el-dialog__wrapper {
+		min-width: 1200px;
 	}
 }
 </style>
