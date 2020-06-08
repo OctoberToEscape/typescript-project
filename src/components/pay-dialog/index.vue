@@ -91,15 +91,19 @@
 			<div :class="selectPayWayNum ? 'wx-bg' : 'zfb-bg'"></div>
 			<p>请使用{{ selectPayWayNum ? "微信" : "支付宝" }}完成支付</p>
 			<div :class="selectPayWayNum ? 'wx_code' : 'zfb_code'">
-				<div class="qrcode" ref="qrCodeUrl"></div>
+				<div ref="qrCodeUrl"></div>
 			</div>
+			<span v-if="pay_result">{{ error }}</span>
 		</div>
 	</div>
 </template>
 <script lang="ts">
 import { Component, Vue, Prop, Emit, Watch } from "vue-property-decorator";
-import { payDialogContent, userPayCode } from "@/api/parents/indent";
-import QRCode from "qrcodejs2";
+import {
+	payDialogContent,
+	userPayCode,
+	userPayProduct,
+} from "@/api/parents/indent";
 @Component({
 	name: "payDialog",
 })
@@ -134,6 +138,10 @@ export default class payDialog extends Vue {
 	private checked: boolean = false;
 	private year_prise: number = 0;
 	private qrcode_order: { [key: string]: string } = {};
+	private payTimer: any = null;
+	private pay_result: boolean = false;
+	private error: string = "";
+	private QRCode: any;
 	//提交订单需要用到的字段
 	private pay_sum: number = 0;
 	private goods_id: string | number = "";
@@ -199,7 +207,7 @@ export default class payDialog extends Vue {
 			});
 		}
 	}
-	//=拿支付链接,拿订单号
+	//拿支付链接,拿订单号
 	private user_pay_result(): void {
 		var pay_type: string = this.selectPayWayNum ? "wechat" : "alipay";
 		userPayCode({
@@ -210,20 +218,61 @@ export default class payDialog extends Vue {
 			gateway: "scan",
 			goods: this.good_list,
 		}).then((res: any) => {
-			console.log(res.data.data);
 			this.qrcode_order = res.data.data;
+			this.creatQrCode(res.data.data.code_url);
 		});
 	}
 	//链接转二维码
 	private creatQrCode(code: string): void {
-		var qrcode = new QRCode(this.$refs.qrCodeUrl, {
+		var qrcode = new this.QRCode(this.$refs.qrCodeUrl, {
 			text: code, // 需要转换为二维码的内容.
 			width: 196,
 			height: 196,
 			colorDark: "#000000",
 			colorLight: "#ffffff",
-			correctLevel: QRCode.CorrectLevel.H,
+			correctLevel: this.QRCode.CorrectLevel.H,
 		});
+
+		this.payTimer = setInterval((): any => {
+			this.userPayProduct();
+		}, 3000);
+
+		setTimeout(() => {
+			clearInterval(this.payTimer);
+			this.pay_result = true;
+			this.error = "支付超时，请重试～";
+			setTimeout((): void => {
+				this.pay_result = false;
+				this.error = "";
+				this.$emit("closeDailog");
+			}, 2000);
+		}, 60000);
+	}
+
+	//查询支付结果
+	private userPayProduct(): void {
+		userPayProduct(this.qrcode_order.order_sn).then((res: any): void => {
+			if (res.data.data.status == 1) {
+				this.$message({
+					message: "支付成功",
+					type: "success",
+				});
+				clearInterval(this.payTimer);
+				//关闭弹窗，刷新状态
+				this.$emit("refresh");
+				// this._userStatus();
+				// this._getOrderLis();
+				// this.dialogTableVisible = false;
+			} else if (res.data.data.status == 0) {
+				this.pay_result = true;
+				this.error = "支付失败,请重试";
+				clearInterval(this.payTimer);
+			}
+		});
+	}
+
+	beforeDestroy() {
+		if (this.payTimer) clearInterval(this.payTimer);
 	}
 }
 </script>
@@ -518,6 +567,14 @@ export default class payDialog extends Vue {
 			margin-bottom: 15px;
 			background-image: url(~@/assets/images/wechat_paybg.png);
 			background-size: 100%;
+		}
+		span {
+			display: block;
+			text-align: center;
+			font-size: 16px;
+			font-family: PingFang SC;
+			font-weight: 400;
+			color: rgba(246, 55, 55, 1);
 		}
 	}
 }

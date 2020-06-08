@@ -121,11 +121,6 @@ export default class layout extends Vue {
 		if (key == "1") {
 			this.$router.push({
 				name: "indent",
-				query: {
-					type: this.user_order_type.account_type,
-					end_time: this.user_order_type.end_time,
-					is_buy: this.user_order_type.is_buy,
-				},
 			});
 		} else {
 			this.$router.push({

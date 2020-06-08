@@ -1,5 +1,13 @@
 import { service, payService } from "@/utils/request";
 
+export const userStatus = (): any => {
+	//用户购买状态
+	return service({
+		method: "get",
+		url: "/user_card",
+	});
+};
+
 export const getOrderLis = (data: number | string | null): any => {
 	//订单列表
 	return service({
@@ -27,10 +35,10 @@ export const userPayCode = (data: {
 	});
 };
 
-// export const userPayProduct = (data) => {
-// 	//支付
-// 	return payService({
-// 		method: "get",
-// 		url: "/pay_result/" + data,
-// 	});
-// };
+export const userPayProduct = (data: string): any => {
+	//支付结果
+	return payService({
+		method: "get",
+		url: `/pay_result/${data}`,
+	});
+};

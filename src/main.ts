@@ -9,6 +9,9 @@ import "element-ui/lib/theme-chalk/index.css";
 import "@/assets/styles/main.scss";
 import "@/icons";
 
+const QRCode = require("qrcodejs2");
+Vue.prototype.QRCode = QRCode;
+
 Vue.use(Element);
 Vue.use(install);
 

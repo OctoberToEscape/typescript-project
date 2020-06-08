@@ -48,9 +48,12 @@
 			id="indent-dialog"
 		>
 			<IndentPayDialog
+				v-if="dialogVisible"
 				:show="show"
 				:active="active"
 				@changeVal="changeVal"
+				@closeDailog="handleClose"
+				@refresh="refresh"
 			></IndentPayDialog>
 		</el-dialog>
 	</div>
@@ -59,7 +62,7 @@
 <script lang="ts">
 import { Component, Vue, Watch } from "vue-property-decorator";
 import { Dictionary } from "vue-router/types/router";
-import { getOrderLis } from "@/api/parents/indent";
+import { getOrderLis, userStatus } from "@/api/parents/indent";
 import IndentPayDialog from "@/components/pay-dialog/index.vue";
 @Component({
 	name: "indent",
@@ -76,7 +79,11 @@ export default class indent extends Vue {
 	//用户订单属性
 	private user_order_type: Dictionary<
 		string | (string | null)[] | null | undefined
-	> = {};
+	> = {
+		type: "",
+		end_time: "",
+		is_buy: "",
+	};
 
 	// 表头数组
 	private table: Array<{ [key: string]: string }> = [
@@ -118,27 +125,40 @@ export default class indent extends Vue {
 
 	created() {
 		// 用户当前属性
-		this.user_order_type.type = this.$route.query.type;
-		this.user_order_type.end_time = this.$route.query.end_time;
-		this.user_order_type.is_buy = this.$route.query.is_buy;
+		this._user_buy_type();
+
+		// 拿数据列表
+		this._getOrderLis();
 
 		//解决刷新问题
 		this.pagination.currentPage = localStorage.getItem("pagination")
 			? Number(localStorage.getItem("pagination"))
 			: 1;
+	}
 
-		// 拿数据列表
+	/**
+	 * @method
+	 */
+
+	//拿表格数据
+	private _getOrderLis(): void {
 		getOrderLis(this.pagination.currentPage).then((res: any): void => {
 			this.tableData = res.data.data.orders;
 			this.pagination.total = res.data.data.total_count;
 		});
 	}
 
-	/**
-	 * @method
-	 */
+	//用户购买信息
+	private _user_buy_type(): void {
+		userStatus().then((res: any): void => {
+			this.user_order_type.type = res.data.data.account_type;
+			this.user_order_type.end_time = res.data.data.end_time;
+			this.user_order_type.is_buy = res.data.data.is_buy;
+		});
+	}
+
 	//切换页数展示不同内容
-	private handleCurrentChange(val: string) {
+	private handleCurrentChange(val: string): void {
 		this.pagination.currentPage = Number(val);
 		localStorage.setItem("pagination", val);
 		getOrderLis(val).then((res: any): void => {
@@ -147,14 +167,14 @@ export default class indent extends Vue {
 		});
 	}
 	//用户购买按钮
-	private user_buy() {
+	private user_buy(): void {
 		this.dialogVisible = true;
 	}
 
 	//关闭弹窗
 	private handleClose(): void {
 		this.dialogVisible = false;
-		setTimeout((): void => {
+		setTimeout(() => {
 			this.show = true;
 			this.active = 0;
 		}, 300);
@@ -166,6 +186,16 @@ export default class indent extends Vue {
 			this.active = 1;
 			this.show = false;
 		}
+	}
+
+	//支付成功后刷新接口
+	private refresh(): void {
+		//刷新表格订单信息
+		this._getOrderLis();
+		//刷新用户信息
+		this._user_buy_type();
+		this.dialogVisible = false;
+		this.show = true;
 	}
 }
 </script>
