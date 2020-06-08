@@ -74,3 +74,16 @@
 	color: #333;
 	font-weight: normal;
 }
+
+// 家长端课程和订单选项卡样式
+.indent .el-menu--horizontal > .el-menu-item.is-active {
+	border-top: 2px solid #409eff !important;
+	color: #409eff !important;
+	border-bottom: none !important;
+	border-left: 1px solid rgba(243, 243, 243, 1) !important;
+	border-right: 1px solid rgba(243, 243, 243, 1) !important;
+}
+
+.indent .el-menu-item {
+	transition: none !important;
+}

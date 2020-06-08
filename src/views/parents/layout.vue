@@ -124,7 +124,7 @@ export default class layout extends Vue {
 			});
 		} else {
 			this.$router.push({
-				name: "study",
+				name: "courseLearning",
 			});
 		}
 	}
@@ -252,7 +252,7 @@ export default class layout extends Vue {
 	.el-main {
 		width: 100%;
 		background: #f4f4f4;
-		padding: 10px 50px 30px 50px;
+		padding: 0px 0px 30px 0px;
 		box-sizing: border-box;
 	}
 }

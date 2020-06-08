@@ -33,8 +33,7 @@ const routes: Array<RouteConfig> = [
 		name: "index",
 		component: () => import("@/views/parents/layout.vue"),
 		alias: "/home",
-		redirect: "study",
-
+		redirect: "courseLearning",
 		children: [
 			{
 				path: "indent",
@@ -46,11 +45,11 @@ const routes: Array<RouteConfig> = [
 				},
 			},
 			{
-				path: "study",
+				path: "courseLearning",
 				component: () => import("@/views/parents/content/study.vue"),
-				name: "study",
+				name: "courseLearning",
 				meta: {
-					title: "study",
+					title: "courseLearning",
 					noCache: true,
 				},
 			},

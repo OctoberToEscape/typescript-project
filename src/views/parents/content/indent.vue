@@ -202,8 +202,10 @@ export default class indent extends Vue {
 
 <style lang="scss" scoped>
 .indent {
-	width: 100%;
-	height: 100% !important;
+	margin-top: 10px !important;
+	width: calc(100% - 100px);
+	margin: auto;
+	height: calc(100% - 10px) !important;
 	border-radius: 6px;
 	padding: 20px 70px;
 	box-sizing: border-box;
