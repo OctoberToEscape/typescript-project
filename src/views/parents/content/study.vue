@@ -7,7 +7,7 @@
 				@reset="onReset"
 			></StudyNav>
 		</el-header>
-		<el-main id="main">
+		<el-main ref="main" id="main">
 			<div
 				v-if="courseList.total_count !== 0"
 				class="course-content"
@@ -77,48 +77,57 @@ export default class indent extends Vue {
 		});
 	}
 	mounted() {
-		//不要问我为啥不用ref(你可以试试)
-		const main: any = document.querySelector("#main");
-		main.addEventListener("scroll", this.onScroll);
+		/**
+		 * @event 触发的事件名
+		 * @function 触发事件方法
+		 * @boolean 重点！！！ 想要监听子组件的事件，需要设置为true,因为滚动事件只能在父组件触发
+		 */
+		window.addEventListener("scroll", this.onScroll, true);
 	}
 	/**
 	 * @methods
 	 */
-	private onScroll(): void {
-		var main: any = document.querySelector("#main");
-		// 变量scrollTop是滚动条滚动时，距离顶部的距离
-		var scrollTop: number = main.scrollTop;
-		// 变量windowHeight是可视区的高度
-		var windowHeight: number = main.clientHeight;
-		// 变量scrollHeight是滚动条的总高度
-		var scrollHeight: number = main.scrollHeight;
-		// 滚动条到底部的条件
-		if (scrollTop + windowHeight >= scrollHeight) {
-			// 写后台加载数据的函数;
-			if (this.page < this.courseList.total_count / 13) {
-				this.page++;
-				// 调用请求函数
-				getTabbarDetails(this.id, this.page).then((res: any) => {
-					this.courseList.total_count = res.data.data.total_count;
-					this.courseList.categories = [
-						...this.courseList.categories,
-						...res.data.data.categories,
-					];
-				});
-			} else {
-				this.$message({
-					showClose: true,
-					message: "没有更多内容了～",
-					type: "info",
-				});
+	private onScroll(event: any): void {
+		/**
+		 * @event
+		 * event.bubbles 子组件滚动是捕获事件为false，父组件滚动是冒泡事件为true
+		 * event.target  事件的目标节点
+		 */
+
+		//子组件滚动
+		if (!event.bubbles) {
+			// 变量scrollTop是滚动条滚动时，距离顶部的距离
+			var scrollTop: number = event.target.scrollTop;
+			// 变量windowHeight是可视区的高度
+			var windowHeight: number = event.target.clientHeight;
+			// 变量scrollHeight是滚动条的总高度
+			var scrollHeight: number = event.target.scrollHeight;
+			// 滚动条到底部的条件
+			if (scrollTop + windowHeight >= scrollHeight) {
+				// 写后台加载数据的函数;
+				if (this.page < this.courseList.total_count / 13) {
+					this.page++;
+					// 调用请求函数
+					getTabbarDetails(this.id, this.page).then((res: any) => {
+						this.courseList.total_count = res.data.data.total_count;
+						this.courseList.categories = [
+							...this.courseList.categories,
+							...res.data.data.categories,
+						];
+					});
+				} else {
+					this.$message({
+						showClose: true,
+						message: "没有更多内容了～",
+						type: "info",
+					});
+				}
 			}
 		}
 	}
 
 	//watchtab变化重置page
 	private onReset(): void {
-		var main: any = document.querySelector("#main");
-		main.scrollTop = 0;
 		this.page = 1;
 		this.getCourseList(this.id, this.page);
 	}
@@ -132,6 +141,8 @@ export default class indent extends Vue {
 	private getCourseList(id: string, page: number): void {
 		getTabbarDetails(id, page).then((res: any): void => {
 			this.courseList = res.data.data;
+			var main: any = document.querySelector("#main");
+			main.scrollTop = 0;
 		});
 	}
 
@@ -148,8 +159,7 @@ export default class indent extends Vue {
 
 	//销毁监听
 	destroyted() {
-		var main: any = document.querySelector("#main");
-		main.removeEventListener("scroll", this.onScroll);
+		window.removeEventListener("scroll", this.onScroll, true);
 	}
 }
 </script>
