@@ -40,6 +40,7 @@ import StudyNav from "@/components/study-nav/index.vue";
 import CourseItem from "@/components/study-course/index.vue";
 import Empty from "@/components/empty/index.vue";
 import { getTabbars, getTabbarDetails } from "@/api/parents/study";
+import { Dictionary } from "vue-router/types/router";
 @Component({
 	name: "study",
 	components: {
@@ -72,6 +73,7 @@ export default class indent extends Vue {
 		getTabbars().then((res: any): void => {
 			this.list = res.data.data;
 			this.id = res.data.data[idx].id;
+			sessionStorage.setItem("back-title", res.data.data[idx].title);
 			//拿列表数据
 			this.getCourseList(this.id, this.page);
 		});
@@ -133,7 +135,8 @@ export default class indent extends Vue {
 	}
 
 	//赋值
-	private changeList(id: string): void {
+	private changeList(id: string, index: number): void {
+		sessionStorage.setItem("back-title", String(this.list[index].title));
 		this.id = id;
 	}
 
@@ -148,18 +151,22 @@ export default class indent extends Vue {
 
 	//跳往哪个页面
 	private goWhere(val: { [key: string]: number | string }): void {
-		if (val.type == "test-listen") {
-			console.log("前往试听", val.title, val.id);
-		} else {
-			if (val.buy) {
-				console.log("前往听", val.title, val.id);
-			}
+		if (val.type == "test-listen" || (val.type == "listen" && val.buy)) {
+			var data: Dictionary<any> = {
+				title: val.title,
+				id: val.id,
+				type: val.type,
+			};
+			this.$router.push({
+				name: "listen",
+				query: data,
+			});
 		}
 	}
 
 	//销毁监听
 	destroyted() {
-		window.removeEventListener("scroll", this.onScroll, true);
+		window.removeEventListener("scroll", this.onScroll);
 	}
 }
 </script>

@@ -260,9 +260,6 @@ export default class payDialog extends Vue {
 				clearInterval(this.payTimer);
 				//关闭弹窗，刷新状态
 				this.$emit("refresh");
-				// this._userStatus();
-				// this._getOrderLis();
-				// this.dialogTableVisible = false;
 			} else if (res.data.data.status == 0) {
 				this.pay_result = true;
 				this.error = "支付失败,请重试";

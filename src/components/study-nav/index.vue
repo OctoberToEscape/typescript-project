@@ -43,13 +43,12 @@ export default class StudyNav extends Vue {
 	private handleClick(index: number, id: string): void {
 		this.num = index;
 		this.id = id;
-		this.$emit("changeList", this.id);
-
+		this.$emit("changeList", this.id, index);
 		sessionStorage.setItem("tab_item", String(index));
 	}
 
 	@Watch("num")
-	private changeNUM(ov: number, nv: number): void {
+	private changeNum(ov: number, nv: number): void {
 		if (Number(ov) !== Number(nv)) {
 			this.$emit("reset");
 		}

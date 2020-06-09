@@ -131,8 +131,8 @@ export default class indent extends Vue {
 		this._getOrderLis();
 
 		//解决刷新问题
-		this.pagination.currentPage = localStorage.getItem("pagination")
-			? Number(localStorage.getItem("pagination"))
+		this.pagination.currentPage = sessionStorage.getItem("pagination")
+			? Number(sessionStorage.getItem("pagination"))
 			: 1;
 	}
 
@@ -160,7 +160,7 @@ export default class indent extends Vue {
 	//切换页数展示不同内容
 	private handleCurrentChange(val: string): void {
 		this.pagination.currentPage = Number(val);
-		localStorage.setItem("pagination", val);
+		sessionStorage.setItem("pagination", val);
 		getOrderLis(val).then((res: any): void => {
 			this.tableData = res.data.data.orders;
 			this.pagination.total = res.data.data.total_count;

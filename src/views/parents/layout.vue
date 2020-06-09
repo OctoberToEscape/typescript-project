@@ -129,6 +129,7 @@ export default class layout extends Vue {
 	//退出登录
 	private handleCommand(): void {
 		localStorage.clear();
+		sessionStorage.clear();
 		this.$router.push({
 			name: "login",
 		});

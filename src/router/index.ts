@@ -29,6 +29,12 @@ const routes: Array<RouteConfig> = [
 		component: () => import("@/views/login/clause.vue"),
 	},
 	{
+		//听（家长端）
+		path: "/listen",
+		name: "listen",
+		component: () => import("@/views/parents/content/listen/index.vue"),
+	},
+	{
 		path: "/",
 		name: "index",
 		component: () => import("@/views/parents/layout.vue"),
