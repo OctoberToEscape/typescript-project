@@ -1,10 +1,15 @@
 <template>
 	<el-container class="study-class">
 		<el-header>
-			<StudyNav @changeList="changeList" :list="list"></StudyNav>
+			<StudyNav
+				@changeList="changeList"
+				:list="list"
+				@reset="onReset"
+			></StudyNav>
 		</el-header>
-		<el-main>
+		<el-main id="main">
 			<div
+				v-if="courseList.total_count !== 0"
 				class="course-content"
 				v-for="(item, index) in courseList.categories"
 				:key="index.id"
@@ -16,24 +21,31 @@
 						v-for="(ele, index) in item.courses"
 						:key="index.id"
 					>
-						<CourseItem :inf="ele"></CourseItem>
+						<CourseItem :inf="ele" @goWhere="goWhere"></CourseItem>
 					</div>
 				</div>
 			</div>
+			<!-- 无内容 -->
+			<Empty
+				text="内容生产中..."
+				v-if="courseList.total_count == 0"
+			></Empty>
 		</el-main>
 	</el-container>
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import StudyNav from "@/components/study-nav/index.vue";
 import CourseItem from "@/components/study-course/index.vue";
+import Empty from "@/components/empty/index.vue";
 import { getTabbars, getTabbarDetails } from "@/api/parents/study";
 @Component({
 	name: "study",
 	components: {
 		StudyNav,
 		CourseItem,
+		Empty,
 	},
 })
 export default class indent extends Vue {
@@ -46,7 +58,10 @@ export default class indent extends Vue {
 	}> = [];
 	private id: string = "";
 	private page: number = 1;
-	private courseList: Array<{ [key: string]: any }> = [];
+	private courseList: { [key: string]: any } = {
+		categories: [],
+		total_count: 0,
+	};
 
 	created() {
 		const idx: any = sessionStorage.getItem("tab_item")
@@ -61,13 +76,56 @@ export default class indent extends Vue {
 			this.getCourseList(this.id, this.page);
 		});
 	}
+	mounted() {
+		//不要问我为啥不用ref(你可以试试)
+		const main: any = document.querySelector("#main");
+		main.addEventListener("scroll", this.onScroll);
+	}
 	/**
 	 * @methods
 	 */
+	private onScroll(): void {
+		var main: any = document.querySelector("#main");
+		// 变量scrollTop是滚动条滚动时，距离顶部的距离
+		var scrollTop: number = main.scrollTop;
+		// 变量windowHeight是可视区的高度
+		var windowHeight: number = main.clientHeight;
+		// 变量scrollHeight是滚动条的总高度
+		var scrollHeight: number = main.scrollHeight;
+		// 滚动条到底部的条件
+		if (scrollTop + windowHeight >= scrollHeight) {
+			// 写后台加载数据的函数;
+			if (this.page < this.courseList.total_count / 13) {
+				this.page++;
+				// 调用请求函数
+				getTabbarDetails(this.id, this.page).then((res: any) => {
+					this.courseList.total_count = res.data.data.total_count;
+					this.courseList.categories = [
+						...this.courseList.categories,
+						...res.data.data.categories,
+					];
+				});
+			} else {
+				this.$message({
+					showClose: true,
+					message: "没有更多内容了～",
+					type: "info",
+				});
+			}
+		}
+	}
 
+	//watchtab变化重置page
+	private onReset(): void {
+		var main: any = document.querySelector("#main");
+		main.scrollTop = 0;
+		this.page = 1;
+		this.getCourseList(this.id, this.page);
+	}
+
+	//赋值
 	private changeList(id: string): void {
 		this.id = id;
-		this.getCourseList(id, this.page);
 	}
 
 	//拿列表数据
@@ -75,6 +133,23 @@ export default class indent extends Vue {
 		getTabbarDetails(id, page).then((res: any): void => {
 			this.courseList = res.data.data;
 		});
+	}
+
+	//跳往哪个页面
+	private goWhere(val: { [key: string]: number | string }): void {
+		if (val.type == "test-listen") {
+			console.log("前往试听", val.title, val.id);
+		} else {
+			if (val.buy) {
+				console.log("前往听", val.title, val.id);
+			}
+		}
+	}
+
+	//销毁监听
+	destroyted() {
+		var main: any = document.querySelector("#main");
+		main.removeEventListener("scroll", this.onScroll);
 	}
 }
 </script>
@@ -88,11 +163,10 @@ export default class indent extends Vue {
 	.el-header {
 		padding: 0;
 		height: 51px !important;
-		margin-bottom: 13px;
 	}
 	.el-main {
 		width: 100%;
-		padding: 0px 120px;
+		padding: 13px 120px 0 130px;
 		box-sizing: border-box;
 		.course-content {
 			width: 100%;

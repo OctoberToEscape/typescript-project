@@ -47,6 +47,13 @@ export default class StudyNav extends Vue {
 
 		sessionStorage.setItem("tab_item", String(index));
 	}
+
+	@Watch("num")
+	private changeNUM(ov: number, nv: number): void {
+		if (Number(ov) !== Number(nv)) {
+			this.$emit("reset");
+		}
+	}
 }
 </script>
 

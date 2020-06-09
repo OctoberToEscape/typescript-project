@@ -17,7 +17,7 @@
 			</dl>
 		</div>
 		<!-- 按钮 -->
-		<CourseBtn :inf="inf"></CourseBtn>
+		<CourseBtn :inf="inf" @goWhere="goWhere"></CourseBtn>
 	</div>
 </template>
 
@@ -32,6 +32,12 @@ import CourseBtn from "@/components/study-course-btn/index.vue";
 })
 export default class extends Vue {
 	@Prop({ default: [] }) private inf!: Array<any>;
+	/**
+	 * @methods
+	 */
+	private goWhere(val: { [key: string]: string | number }): void {
+		this.$emit("goWhere", val);
+	}
 }
 </script>
 <style lang="scss" scoped>

@@ -69,11 +69,9 @@
 				</el-col>
 			</el-row>
 		</el-header>
-		<el-container>
-			<el-main>
-				<router-view></router-view>
-			</el-main>
-		</el-container>
+		<el-main>
+			<router-view></router-view>
+		</el-main>
 	</el-container>
 </template>
 <script lang="ts">
@@ -153,14 +151,10 @@ export default class layout extends Vue {
 }
 </script>
 <style lang="scss" scoped>
-.el-container {
-	width: 100%;
-	height: 100vh;
-}
 .indent {
 	width: 100%;
-	height: 100vh;
 	min-width: 1200px;
+	// height: 100vh;
 	.el-header {
 		padding: 0px;
 		z-index: 2;
@@ -252,8 +246,8 @@ export default class layout extends Vue {
 	.el-main {
 		width: 100%;
 		background: #f4f4f4;
-		padding: 0px 0px 30px 0px;
-		box-sizing: border-box;
+		padding: 0px;
+		height: calc(100vh - 60px);
 	}
 }
 </style>

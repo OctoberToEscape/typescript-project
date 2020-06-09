@@ -1,6 +1,9 @@
 <template>
 	<div class="course-btns">
-		<div class="test-listen">
+		<div
+			class="test-listen"
+			@click="goWhere(inf.id, inf.is_buy, inf.title, 'test-listen')"
+		>
 			<img class="icon" src="@/assets/images/listen_1.png" />
 			<div class="top-right" v-if="inf.is_test_listen_once">
 				<img src="@/assets/images/touch_icon.png" />
@@ -11,6 +14,7 @@
 		</div>
 		<div
 			:class="inf.is_buy ? 'official-listen-buy' : 'official-listen-not'"
+			@click="goWhere(inf.id, inf.is_buy, inf.title, 'listen')"
 		>
 			<img
 				class="icon"
@@ -20,10 +24,10 @@
 						: require('@/assets/images/listen_2_not.png')
 				"
 			/>
-			<div class="top-right">
+			<div class="top-right" v-if="inf.is_listen_once">
 				<img src="@/assets/images/touch_icon.png" />
 			</div>
-			<div class="bottom-left">
+			<div class="bottom-left" v-if="inf.is_listen_complete == 1">
 				<img src="@/assets/images/time.png" />
 			</div>
 		</div>
@@ -36,8 +40,21 @@ import { Component, Vue, Prop } from "vue-property-decorator";
 })
 export default class extends Vue {
 	@Prop({ default: [] }) private inf!: Array<any>;
+
 	created() {
-		console.log(this.inf);
+		// console.log(this.inf);
+	}
+	/**
+	 * @methods
+	 */
+	private goWhere(
+		id: string,
+		buy: number,
+		title: string,
+		type: string
+	): void {
+		let data: { [key: string]: string | number } = { id, buy, title, type };
+		this.$emit("goWhere", data);
 	}
 }
 </script>
