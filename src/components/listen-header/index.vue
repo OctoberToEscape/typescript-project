@@ -11,7 +11,7 @@
 					</div>
 				</div>
 			</el-col>
-			<el-col :span="12">
+			<el-col :span="14">
 				<div class="user" id="user_drop">
 					<el-dropdown
 						trigger="click"

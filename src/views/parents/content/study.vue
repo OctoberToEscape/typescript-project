@@ -117,12 +117,6 @@ export default class indent extends Vue {
 							...res.data.data.categories,
 						];
 					});
-				} else {
-					this.$message({
-						showClose: true,
-						message: "没有更多内容了～",
-						type: "info",
-					});
 				}
 			}
 		}
