@@ -45,6 +45,7 @@
 		<el-dialog
 			:visible.sync="dialogVisible"
 			:before-close="handleClose"
+			:close-on-click-modal="false"
 			width="680px"
 			id="indent-dialog"
 		>
@@ -206,7 +207,7 @@ export default class indent extends Vue {
 	margin-top: 10px !important;
 	width: calc(100% - 100px);
 	margin: auto;
-	height: calc(100% - 10px) !important;
+	height: calc(100% - 30px) !important;
 	border-radius: 6px;
 	padding: 20px 70px;
 	box-sizing: border-box;
