@@ -1,6 +1,6 @@
 import { service } from "@/utils/request";
 
-export const getVideos = (data: any): any => {
+export const getVideos = (data: string | (string | null)[]): any => {
 	//拿听视频列表
 	return service({
 		method: "get",
@@ -8,7 +8,7 @@ export const getVideos = (data: any): any => {
 	});
 };
 
-export const getTestVideo = (data: any): any => {
+export const getTestVideo = (data: string | (string | null)[]): any => {
 	//拿试听视频列表
 	return service({
 		method: "get",
@@ -16,7 +16,9 @@ export const getTestVideo = (data: any): any => {
 	});
 };
 
-export const submitListenTime = (data: any): any => {
+export const submitListenTime = (data: {
+	[key: string]: string | number | (string | null)[];
+}): any => {
 	//提交听课记录
 	return service({
 		method: "post",
@@ -25,7 +27,7 @@ export const submitListenTime = (data: any): any => {
 	});
 };
 
-export const getParentListenTime = (data: any): any => {
+export const getParentListenTime = (data: string | (string | null)[]): any => {
 	//拿到听课的记录
 	return service({
 		method: "get",
@@ -33,7 +35,9 @@ export const getParentListenTime = (data: any): any => {
 	});
 };
 
-export const parentFinishListen = (data: any): any => {
+export const parentFinishListen = (data: {
+	[key: string]: string | number | (string | null)[];
+}): any => {
 	//听课完成还是没完成
 	return service({
 		method: "post",
