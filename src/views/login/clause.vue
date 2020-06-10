@@ -37,6 +37,11 @@ export default class Clause extends Vue {
 	created() {
 		var flag: string | (string | null)[] = this.$route.query.flag;
 		getClause(flag).then((res: any) => {
+			const regex: any = new RegExp("<img", "gi");
+			res.data.data.content = res.data.data.content.replace(
+				regex,
+				`<img style="width: 100%; height: auto"`
+			);
 			this.rich.title = res.data.data.title;
 			this.rich.content = res.data.data.content;
 		});
@@ -58,7 +63,6 @@ export default class Clause extends Vue {
 		box-sizing: border-box;
 		.rich {
 			width: 100%;
-			height: 100%;
 			h3 {
 				text-align: center;
 				font-size: 26px;
@@ -70,9 +74,6 @@ export default class Clause extends Vue {
 			.content {
 				color: #333333;
 				font-size: 16px;
-			}
-			.content >>> img {
-				width: 100%;
 			}
 		}
 	}

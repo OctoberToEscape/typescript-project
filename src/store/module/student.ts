@@ -27,4 +27,4 @@ export default class Student extends VuexModule {
 	}
 }
 
-export const UserModule = getModule(Student);
+export const StudentModule = getModule(Student);

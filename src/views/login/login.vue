@@ -307,27 +307,22 @@ export default class login extends Vue {
 				UserModule.getAuthorization(TOKEN);
 				UserModule.getTelephone(TEL);
 
-				setTimeout((): void => {
-					this.$router.push({
-						path: "/",
-					});
-				}, 2000);
-				// userStatus().then((res: any) => {
-				// 	localStorage.setItem("is_buy", res.data.data.is_buy);
-				// 	if (res.data.data.is_buy) {
-				// 		setTimeout(() => {
-				// 			this.$router.push({
-				// 				path: "/student",
-				// 			});
-				// 		}, 2000);
-				// 	} else {
-				// 		setTimeout(() => {
-				// 			this.$router.push({
-				// 				path: "/",
-				// 			});
-				// 		}, 2000);
-				// 	}
-				// });
+				userStatus().then((res: any) => {
+					localStorage.setItem("is_buy", res.data.data.is_buy);
+					if (res.data.data.is_buy) {
+						setTimeout(() => {
+							this.$router.push({
+								path: "/student",
+							});
+						}, 2000);
+					} else {
+						setTimeout(() => {
+							this.$router.push({
+								path: "/",
+							});
+						}, 2000);
+					}
+				});
 			}
 		});
 	}
@@ -359,27 +354,22 @@ export default class login extends Vue {
 				var TEL = res.data.data.user.mobile;
 				UserModule.getAuthorization(TOKEN);
 				UserModule.getTelephone(TEL);
-				setTimeout((): void => {
-					this.$router.push({
-						path: "/",
-					});
-				}, 2000);
-				// userStatus().then((res: any) => {
-				// 	localStorage.setItem("is_buy", res.data.data.is_buy);
-				// 	if (res.data.data.is_buy) {
-				// 		setTimeout(() => {
-				// 			this.$router.push({
-				// 				path: "/student",
-				// 			});
-				// 		}, 2000);
-				// 	} else {
-				// 		setTimeout(() => {
-				// 			this.$router.push({
-				// 				path: "/",
-				// 			});
-				// 		}, 2000);
-				// 	}
-				// });
+				userStatus().then((res: any) => {
+					localStorage.setItem("is_buy", res.data.data.is_buy);
+					if (res.data.data.is_buy) {
+						setTimeout(() => {
+							this.$router.push({
+								path: "/student",
+							});
+						}, 2000);
+					} else {
+						setTimeout(() => {
+							this.$router.push({
+								path: "/",
+							});
+						}, 2000);
+					}
+				});
 			} else if (res.data.data.status == 10) {
 				//服务器错误
 				this.$message({

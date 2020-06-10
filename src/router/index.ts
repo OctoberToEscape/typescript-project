@@ -3,6 +3,8 @@ import VueRouter, { RouteConfig } from "vue-router";
 
 Vue.use(VueRouter);
 
+const isBuy: string = localStorage.getItem("is_buy") ? "/student" : "/";
+
 const routes: Array<RouteConfig> = [
 	{
 		//登录
@@ -29,17 +31,24 @@ const routes: Array<RouteConfig> = [
 		component: () => import("@/views/login/clause.vue"),
 	},
 	{
+		//服务协议
+		path: "/aboutAs",
+		name: "aboutAs",
+		component: () => import("@/views/student/aboutAs.vue"),
+	},
+	{
 		//听（家长端）
 		path: "/listen",
 		name: "listen",
 		component: () => import("@/views/parents/content/listen/index.vue"),
 	},
 	{
+		//家长端
 		path: "/",
 		name: "index",
 		component: () => import("@/views/parents/layout.vue"),
 		alias: "/home",
-		redirect: "courseLearning",
+		redirect: isBuy,
 		children: [
 			{
 				path: "indent",
@@ -56,6 +65,24 @@ const routes: Array<RouteConfig> = [
 				name: "courseLearning",
 				meta: {
 					title: "courseLearning",
+					noCache: true,
+				},
+			},
+		],
+	},
+	{
+		//学生端
+		path: "/student",
+		component: () => import("@/views/student/layout.vue"),
+		// redirect: isBuy,
+		redirect: "/student/index",
+		children: [
+			{
+				path: "index",
+				component: () => import("@/views/student/index.vue"),
+				name: "student",
+				meta: {
+					title: "首页",
 					noCache: true,
 				},
 			},
@@ -81,7 +108,8 @@ router.beforeEach((to, from, next) => {
 	if (
 		to.path === "/login" ||
 		to.name === "register" ||
-		to.name === "changePassword"
+		to.name === "changePassword" ||
+		to.name === "clause"
 	) {
 		next();
 	} else {
