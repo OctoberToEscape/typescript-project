@@ -18,6 +18,7 @@
 		<el-table :data="tableData" border style="margin-bottom:26px" stripe>
 			<el-table-column
 				v-for="(item, index) in table"
+				:key="index.id"
 				:prop="item.prop"
 				:label="item.label"
 				:width="item.width"

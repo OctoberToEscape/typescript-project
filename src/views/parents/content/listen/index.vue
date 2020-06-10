@@ -151,7 +151,7 @@ export default class extends Vue {
 		//家长是否完成听课
 		parentFinishListen({
 			course_id: this.id,
-			type: this.$route.query.type,
+			type: this.$route.query.type == "listen" ? 2 : 1,
 			seconds: this.watchTime,
 		});
 
@@ -214,7 +214,7 @@ export default class extends Vue {
 	//试听||听，听完调接口
 	private listen_Finish(): void {
 		parentFinishListen({
-			type: this.$route.query.type,
+			type: this.$route.query.type == "listen" ? 2 : 1,
 			course_id: this.id,
 			seconds: this.watchTime,
 		}).then((res: any): void => {
