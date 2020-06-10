@@ -139,22 +139,22 @@ export default class extends Vue {
 
 	//返回上一页
 	private onBack(): void {
-		if (this.videoList.length && this.$route.query.type == "listen") {
-			//提交听课记录
-			submitListenTime({
+		if (this.videoList.length) {
+			//家长是否完成听课
+			parentFinishListen({
 				course_id: this.id,
-				video_id: this.videoList[this.index].video_id,
-				duration: this.timeDisplay,
+				type: this.$route.query.type == "listen" ? 2 : 1,
+				seconds: this.watchTime,
 			});
+			if (this.$route.query.type == "listen") {
+				//提交听课记录
+				submitListenTime({
+					course_id: this.id,
+					video_id: this.videoList[this.index].video_id,
+					duration: this.timeDisplay,
+				});
+			}
 		}
-
-		//家长是否完成听课
-		parentFinishListen({
-			course_id: this.id,
-			type: this.$route.query.type == "listen" ? 2 : 1,
-			seconds: this.watchTime,
-		});
-
 		this.$router.go(-1);
 	}
 
