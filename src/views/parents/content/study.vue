@@ -23,6 +23,7 @@
 					>
 						<CourseItem :inf="ele" @goWhere="goWhere"></CourseItem>
 					</div>
+					<i v-for="n in item.courses.length"></i>
 				</div>
 			</div>
 			<!-- 无内容 -->
@@ -193,18 +194,22 @@ export default class indent extends Vue {
 				display: flex;
 				flex-wrap: wrap;
 				margin-bottom: 21px;
-			}
-			.course-list {
-				flex-shrink: 0;
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				box-sizing: border-box;
-				width: 224px;
-				height: 314px;
-				margin-right: 20px;
-				margin-bottom: 20px;
-				border-radius: 5px;
+				justify-content: space-between;
+				.course-list {
+					flex-shrink: 0;
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					box-sizing: border-box;
+					width: 224px;
+					height: 314px;
+					// margin-right: 20px;
+					margin-bottom: 20px;
+					border-radius: 5px;
+				}
+				i {
+					width: 224px;
+				}
 			}
 		}
 	}

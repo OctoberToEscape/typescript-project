@@ -47,6 +47,7 @@
 								>
 									<CourseItem :inf="c"></CourseItem>
 								</div>
+								<i v-for="n in ele.courses.length"></i>
 							</div>
 						</div>
 					</div>
@@ -73,6 +74,7 @@
 										@goStudy="goStudy"
 									></CourseItem>
 								</div>
+								<i v-for="n in item.courses.length"></i>
 							</div>
 						</div>
 					</div>
@@ -221,6 +223,7 @@ export default class CourseList extends Vue {
 	private getData(): void {
 		getCourseData(this.activeTab).then((res: any): void => {
 			this.dataList = res.data.data;
+			console.log(res.data.data);
 		});
 	}
 
@@ -349,7 +352,7 @@ export default class CourseList extends Vue {
 					.course-box {
 						display: flex;
 						flex-wrap: wrap;
-						// justify-content: space-between;
+						justify-content: space-between;
 						.course-list-item {
 							display: flex;
 							flex-direction: column;
@@ -360,9 +363,11 @@ export default class CourseList extends Vue {
 							overflow: hidden;
 							background: #fff;
 							border-radius: 5px;
-							margin-right: 17px;
 							margin-bottom: 17px;
 						}
+					}
+					i {
+						width: 206px;
 					}
 				}
 			}

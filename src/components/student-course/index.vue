@@ -66,6 +66,9 @@ export default class courseItem extends Vue {
 				color: #333;
 				margin-bottom: 9px;
 				height: 16px;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				white-space: nowrap;
 			}
 			dd {
 				font-size: 14px;

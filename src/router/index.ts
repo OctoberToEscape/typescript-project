@@ -407,9 +407,7 @@ const routes: Array<RouteConfig> = [
 					{
 						path: "topTeacherClass",
 						component: () =>
-							import(
-								"@/views/student/coursrIndex/courseList.vue"
-							),
+							import("@/views/student/noCourse/index.vue"),
 						name: "topTeacherClass",
 						meta: {
 							title: "名师课堂",
@@ -419,9 +417,7 @@ const routes: Array<RouteConfig> = [
 					{
 						path: "writingForum",
 						component: () =>
-							import(
-								"@/views/student/coursrIndex/courseList.vue"
-							),
+							import("@/views/student/noCourse/index.vue"),
 						name: "writingForum",
 						meta: {
 							title: "写作论坛",
