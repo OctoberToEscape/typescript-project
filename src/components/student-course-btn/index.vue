@@ -2,7 +2,7 @@
 	<div class="student-course-status status-list">
 		<div
 			class="status-item listen"
-			@click="goEmit('listen_student', stateInfo.id, stateInfo.title)"
+			@click="goEmit('listen_child', stateInfo.id, stateInfo.title)"
 		>
 			<img src="@/assets/images/status/listen.png" />
 			<div

@@ -223,7 +223,6 @@ export default class CourseList extends Vue {
 	private getData(): void {
 		getCourseData(this.activeTab).then((res: any): void => {
 			this.dataList = res.data.data;
-			console.log(res.data.data);
 		});
 	}
 
@@ -331,6 +330,10 @@ export default class CourseList extends Vue {
 				}
 				.course-list {
 					width: 100%;
+					margin-bottom: 26px;
+					&:last-child {
+						margin-bottom: 0;
+					}
 					.course-title-yun {
 						box-sizing: border-box;
 						line-height: 50px;

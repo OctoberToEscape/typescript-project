@@ -113,11 +113,18 @@ export default class StudentLayout extends Vue {
 		UserModule.getCharacter("student");
 		// 获取用户名
 		this.userName = localStorage.tel;
+
 		// 判断是否是首页
-		const routerPath: string = window.location.href
-			.split("student/")[1]
-			.split("/")[0];
-		this.isIndex = routerPath === "index";
+		var reg = /\b(student)\b/;
+		if (reg.test(window.location.href)) {
+			const routerPath: string = window.location.href
+				.split("student/")[1]
+				.split("/")[0];
+			this.isIndex = routerPath === "index";
+		} else {
+			this.isIndex = false;
+		}
+
 		//获取知识力
 		getKnowledgePower().then((res: any) => {
 			StudentModule.UPDATA_KNOWLEDGE_POWER(res.data.knowledge_power);
@@ -125,11 +132,16 @@ export default class StudentLayout extends Vue {
 	}
 
 	@Watch("$route")
-	private changeRoute(val: string): void {
-		const routerPath: string = window.location.href
-			.split("student/")[1]
-			.split("/")[0];
-		this.isIndex = routerPath === "index";
+	private changeRoute(): void {
+		var reg = /\b(student)\b/;
+		if (reg.test(window.location.href)) {
+			const routerPath: string = window.location.href
+				.split("student/")[1]
+				.split("/")[0];
+			this.isIndex = routerPath === "index";
+		} else {
+			this.isIndex = false;
+		}
 	}
 }
 </script>

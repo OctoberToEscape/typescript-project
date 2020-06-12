@@ -428,8 +428,8 @@ const routes: Array<RouteConfig> = [
 			},
 			{
 				//听（学生端）
-				path: "/listen_student",
-				name: "listen_student",
+				path: "/listen_child",
+				name: "listen_child",
 				component: () => import("@/views/student/listen/index.vue"),
 				meta: {
 					title: "听/试听",

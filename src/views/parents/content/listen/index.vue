@@ -70,7 +70,7 @@ export default class extends Vue {
 	private controlShow: boolean = false;
 	private backName: string | null = "";
 	private componentsTitle: string | (string | null)[] = "";
-	private show: boolean = true;
+	private show: boolean = false;
 	private id: string | (string | null)[] = "";
 	private video_id: string = "";
 	private videoList: Array<{ [key: string]: string }> = [];
@@ -227,7 +227,7 @@ export default class extends Vue {
 		if (this.index !== 0 && this.index > 0) {
 			this.index--;
 			this.video_id = this.videoList[this.index].video_id;
-			this.show = true;
+			this.show = false;
 			this.watchData.duration = 0;
 		}
 	}
@@ -236,7 +236,7 @@ export default class extends Vue {
 		if (this.index < this.videoList.length - 1) {
 			this.index++;
 			this.video_id = this.videoList[this.index].video_id;
-			this.show = true;
+			this.show = false;
 			this.watchData.duration = 0;
 		}
 	}
