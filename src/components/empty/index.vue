@@ -1,5 +1,5 @@
 <template>
-	<div class="empty">
+	<div class="empty" :style="{ paddingTop: padding + 'px' }">
 		<img :src="url" />
 		<p>{{ text }}</p>
 	</div>
@@ -13,6 +13,7 @@ export default class extends Vue {
 	@Prop({ default: require("@/assets/images/student_empty.png") })
 	private url!: string;
 	@Prop({ default: "" }) private text!: string;
+	@Prop({ default: 285 }) private padding!: number;
 }
 </script>
 <style lang="scss" scoped>
@@ -22,6 +23,7 @@ export default class extends Vue {
 	flex-direction: column;
 	align-items: center;
 	padding: 285px 0 110px;
+	margin: auto;
 	img {
 		width: 347px;
 		height: 212px;

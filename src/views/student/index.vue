@@ -37,7 +37,7 @@ export default class StudentIndex extends Vue {
 	 * @data
 	 * @return
 	 */
-	private courseList: Array<any> = [];
+	private courseList: Array<{ [key: string]: number | string }> = [];
 	private courseLinks: Array<string> = [
 		"jambic",
 		"poetry",
@@ -51,15 +51,11 @@ export default class StudentIndex extends Vue {
 	 */
 	private keepCategoryId(id: string, ind: number): void {
 		this.$router.push({ name: this.courseLinks[ind] });
-		localStorage.studentCategoryId = id;
+		sessionStorage.setItem("studentCategoryId", id);
 	}
-	// private goAboutUs(): void {}
 	created() {
-		localStorage.removeItem("sct");
 		getProducts().then((res: any): void => {
-			if (res.code == 0) {
-				this.courseList = res.data;
-			}
+			this.courseList = res.data;
 		});
 	}
 }

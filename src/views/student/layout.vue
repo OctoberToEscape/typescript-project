@@ -2,15 +2,19 @@
 	<el-container class="student-layout">
 		<el-header class="header">
 			<div class="logo fLeft">
-				<router-link class="fLeft" :to="{ path: '/student' }" tag="div">
-					<div class="logo-img fLeft"></div>
-					<h1 class="fLeft">白鹿洞大语文学习平台</h1>
-					<div class="back-home fLeft" v-show="!isIndex">
+				<router-link
+					class="logo-content"
+					:to="{ path: '/student' }"
+					tag="div"
+				>
+					<div class="logo-img "></div>
+					<h1>白鹿洞大语文学习平台</h1>
+					<div class="back-home" v-show="!isIndex">
 						<img src="@/assets/images/home.png" />
 					</div>
 				</router-link>
 				<router-link
-					class="fLeft change-model"
+					class="change-model"
 					:to="{ name: 'courseLearning' }"
 					tag="div"
 					><img src="@/assets/images/ic_change_model.png" /><span
@@ -110,7 +114,7 @@ export default class StudentLayout extends Vue {
 		// 获取用户名
 		this.userName = localStorage.tel;
 		// 判断是否是首页
-		const routerPath = window.location.href
+		const routerPath: string = window.location.href
 			.split("student/")[1]
 			.split("/")[0];
 		this.isIndex = routerPath === "index";
@@ -122,7 +126,7 @@ export default class StudentLayout extends Vue {
 
 	@Watch("$route")
 	private changeRoute(val: string): void {
-		const routerPath = window.location.href
+		const routerPath: string = window.location.href
 			.split("student/")[1]
 			.split("/")[0];
 		this.isIndex = routerPath === "index";
@@ -133,7 +137,7 @@ export default class StudentLayout extends Vue {
 .student-layout {
 	height: 100vh;
 	width: 100%;
-	min-width: 1200px;
+	min-width: 1400px;
 	overflow-x: scroll;
 	font-family: "DFPWaWaW5";
 	color: #333;
@@ -148,21 +152,31 @@ export default class StudentLayout extends Vue {
 		.logo {
 			display: flex;
 			align-items: center;
-			margin-top: 16px;
+			margin-top: 10px;
 			cursor: pointer;
-			.logo-img {
-				width: 29px;
-				height: 29px;
-				background: url(~@/assets/images/logo2.png) no-repeat;
-				background-size: contain;
+			.logo-content {
+				display: flex;
+				align-items: center;
+				.logo-img {
+					width: 42px;
+					height: 40px;
+					background-image: url(~@/assets/images/logo2.png);
+				}
+				h1 {
+					font-size: 22px;
+					font-weight: 500;
+					color: #fff;
+					line-height: 29px;
+					margin: 0 10px 0 9px;
+				}
+				.back-home {
+					margin-right: 10px;
+					img {
+						margin-top: 6px;
+					}
+				}
 			}
-			h1 {
-				font-size: 22px;
-				font-weight: 500;
-				color: #fff;
-				line-height: 29px;
-				margin: 0 10px 0 9px;
-			}
+
 			.change-model {
 				width: 114px;
 				height: 22px;

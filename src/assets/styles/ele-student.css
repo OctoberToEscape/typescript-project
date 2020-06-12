@@ -1,0 +1,141 @@
+/* 用户名下拉框 */
+.el-dropdown-menu.user-info-dropdown {
+	width: 160px;
+	line-height: 30px;
+	padding: 0;
+	font-family: "DFPWaWaW5";
+}
+.user-info-dropdown .el-dropdown-menu__item {
+	padding: 0;
+	text-align: center;
+	color: var(--textColor);
+}
+.user-info-dropdown .el-dropdown-menu__item.is-disabled {
+	color: #c2c8d0;
+}
+.user-info-dropdown .popper__arrow {
+	display: none;
+}
+/* 列表页 */
+.student-nav-header {
+	padding: 0;
+	height: 153px !important;
+}
+.student-nav-list .nav-list {
+	background: none;
+	border: none;
+}
+.student-nav-list .el-menu.nav-list:before,
+.student-nav-list .el-menu.nav-list:after {
+	display: none !important;
+}
+.student-nav-list .nav-list .nav-item {
+	padding: 0 !important;
+}
+
+/* dialog close btn */
+.el-dialog .el-dialog__header {
+	padding: 0;
+}
+.el-dialog .el-dialog__headerbtn {
+	top: -10px;
+	right: -25px;
+	font-size: 20px;
+}
+.el-dialog .el-dialog__close {
+	color: #fff;
+}
+.el-dialog .el-button--primary {
+	background-color: #63a7f8 !important;
+}
+.el-dialog .el-button--text {
+	color: #f7ac1a !important;
+	margin-right: 30px;
+}
+.el-select-dropdown {
+	font-family: "DFPWaWaW5";
+}
+/* dialog-header */
+.dialog-header .el-dialog__header {
+	height: 60px;
+	background: #f4f4f4;
+	border-radius: 5px 5px 0 0;
+	font-family: "DFPWaWaW5";
+}
+.dialog-header .el-dialog__header .el-dialog__title {
+	line-height: 60px;
+	color: #333;
+}
+/* dialog-label */
+.dialog-label .label-box .el-textarea__inner {
+	border: none;
+	line-height: 50px;
+	font-size: 16px;
+	color: #333;
+	background-color: transparent;
+	background: url("~@/assets/images/label_line.png") repeat;
+}
+.dialog-label .el-dialog__body {
+	padding: 0;
+}
+/* dialog-word-list */
+.dialog-word-list .el-dialog__body {
+	padding: 20px 30px;
+}
+/* dialog-edit-word  */
+.dialog-edit-word .el-form {
+	font-size: 18px;
+	color: #333;
+	font-family: "DFPWaWaW5";
+}
+.dialog-edit-word .el-input__inner {
+	background: #fff;
+	border-color: #ddd;
+	border-radius: 5px;
+}
+.dialog-edit-word .el-select {
+	width: 100%;
+}
+.dialog-edit-word .el-form--label-top .el-form-item__label {
+	padding: 0 0 8px;
+}
+.dialog-edit-word .el-form-item {
+	margin-bottom: 20px;
+}
+.dialog-edit-word .el-dialog--center .el-dialog__footer,
+.edit-word {
+	text-align: right;
+}
+.dialog-edit-word .el-dialog--center .el-dialog__footer button,
+.edit-word button {
+	font-family: "DFPWaWaW5";
+}
+/* .el-collapse-item */
+.el-collapse {
+	border: none;
+}
+.el-collapse-item__header {
+	height: 42px;
+	line-height: 42px;
+	border-bottom: none;
+	padding: 0 10px;
+}
+.el-collapse-item__header i {
+	display: none;
+}
+.el-collapse-item {
+	padding: 0 10px;
+}
+.el-collapse-item.is-active {
+	background: #f4f6f7;
+}
+.el-collapse-item.is-active .el-collapse-item__header,
+.el-collapse-item.is-active .el-collapse-item__wrap {
+	background: transparent;
+}
+.el-collapse-item.is-active .el-collapse-item__header {
+	border-bottom: 1px solid #e0e2e5;
+}
+.el-collapse-item.is-active .el-collapse-item__content {
+	padding: 15px 10px;
+}

@@ -42,6 +42,7 @@ const routes: Array<RouteConfig> = [
 		name: "listen",
 		component: () => import("@/views/parents/content/listen/index.vue"),
 	},
+
 	{
 		//家长端
 		path: "/",
@@ -83,6 +84,359 @@ const routes: Array<RouteConfig> = [
 				name: "student",
 				meta: {
 					title: "首页",
+					noCache: true,
+				},
+			},
+			{
+				//字词
+				path: "/student/jambic",
+				component: () => import("@/views/student/subNav.vue"),
+				redirect: "/student/jambic/classification",
+				name: "jambic",
+				children: [
+					{
+						path: "classification",
+						component: () =>
+							import(
+								"@/views/student/coursrIndex/courseList.vue"
+							),
+						name: "jambicClassification",
+						meta: {
+							title: "分级自学",
+							noCache: true,
+						},
+					},
+					{
+						path: "advancedStrategy",
+						component: () =>
+							import(
+								"@/views/student/coursrIndex/courseList.vue"
+							),
+						name: "jambicAdvancedStrategy",
+						meta: {
+							title: "进阶攻略",
+							noCache: true,
+						},
+					},
+					{
+						path: "textbook",
+						component: () =>
+							import(
+								"@/views/student/coursrIndex/courseList.vue"
+							),
+						name: "jambicTextbook",
+						meta: {
+							title: "教材考试",
+							noCache: true,
+						},
+					},
+					{
+						path: "subjectLearning",
+						component: () =>
+							import(
+								"@/views/student/coursrIndex/courseList.vue"
+							),
+						name: "jambicSubjectLearning",
+						meta: {
+							title: "专题研习",
+							noCache: true,
+						},
+					},
+				],
+			},
+
+			{
+				//古诗文
+				path: "/student/poetry",
+				component: () => import("@/views/student/subNav.vue"),
+				redirect: "/student/poetry/classification",
+				name: "poetry",
+				children: [
+					{
+						path: "classification",
+						component: () =>
+							import(
+								"@/views/student/coursrIndex/courseList.vue"
+							),
+						name: "poetryClassification",
+						meta: {
+							title: "分级自学",
+							noCache: true,
+						},
+					},
+					{
+						path: "advancedStrategy",
+						component: () =>
+							import(
+								"@/views/student/coursrIndex/courseList.vue"
+							),
+						name: "poetryAdvancedStrategy",
+						meta: {
+							title: "进阶攻略",
+							noCache: true,
+						},
+					},
+					{
+						path: "textbook",
+						component: () =>
+							import(
+								"@/views/student/coursrIndex/courseList.vue"
+							),
+						name: "poetryTextbook",
+						meta: {
+							title: "教材考试",
+							noCache: true,
+						},
+					},
+					{
+						path: "subjectLearning",
+						component: () =>
+							import(
+								"@/views/student/coursrIndex/courseList.vue"
+							),
+						name: "poetrySubjectLearning",
+						meta: {
+							title: "专题研习",
+							noCache: true,
+						},
+					},
+				],
+			},
+			{
+				//文学基础
+				path: "/student/historyBase",
+				component: () => import("@/views/student/subNav.vue"),
+				redirect: "/student/historyBase/classification",
+				name: "historyBase",
+				children: [
+					{
+						path: "classification",
+						component: () =>
+							import(
+								"@/views/student/coursrIndex/courseList.vue"
+							),
+						name: "historyBaseClassification",
+						meta: {
+							title: "分级自学",
+							noCache: true,
+						},
+					},
+					{
+						path: "advancedStrategy",
+						component: () =>
+							import(
+								"@/views/student/coursrIndex/courseList.vue"
+							),
+						name: "historyBaseAdvancedStrategy",
+						meta: {
+							title: "进阶攻略",
+							noCache: true,
+						},
+					},
+					{
+						path: "textbook",
+						component: () =>
+							import(
+								"@/views/student/coursrIndex/courseList.vue"
+							),
+						name: "historyBaseTextbook",
+						meta: {
+							title: "教材考试",
+							noCache: true,
+						},
+					},
+					{
+						path: "subjectLearning",
+						component: () =>
+							import(
+								"@/views/student/coursrIndex/courseList.vue"
+							),
+						name: "historyBaseSubjectLearning",
+						meta: {
+							title: "专题研习",
+							noCache: true,
+						},
+					},
+				],
+			},
+			{
+				//中外文学
+				path: "/student/global",
+				component: () => import("@/views/student/subNav.vue"),
+				redirect: "/student/global/classification",
+				name: "global",
+				children: [
+					{
+						path: "classification",
+						component: () =>
+							import(
+								"@/views/student/coursrIndex/courseList.vue"
+							),
+						name: "globalClassification",
+						meta: {
+							title: "分级自学",
+							noCache: true,
+						},
+					},
+					{
+						path: "advancedStrategy",
+						component: () =>
+							import(
+								"@/views/student/coursrIndex/courseList.vue"
+							),
+						name: "globalBaseAdvancedStrategy",
+						meta: {
+							title: "进阶攻略",
+							noCache: true,
+						},
+					},
+					{
+						path: "textbook",
+						component: () =>
+							import(
+								"@/views/student/coursrIndex/courseList.vue"
+							),
+						name: "globalTextbook",
+						meta: {
+							title: "教材考试",
+							noCache: true,
+						},
+					},
+					{
+						path: "subjectLearning",
+						component: () =>
+							import(
+								"@/views/student/coursrIndex/courseList.vue"
+							),
+						name: "globalSubjectLearning",
+						meta: {
+							title: "专题研习",
+							noCache: true,
+						},
+					},
+				],
+			},
+			{
+				//游学
+				path: "/student/studyTour",
+				component: () => import("@/views/student/subNav.vue"),
+				redirect: "/student/studyTour/stWhiteDeerCave",
+				name: "studyTour",
+				children: [
+					{
+						path: "stWhiteDeerCave",
+						component: () =>
+							import(
+								"@/views/student/coursrIndex/courseList.vue"
+							),
+						name: "stWhiteDeerCave",
+						meta: {
+							title: "白鹿洞游学",
+							noCache: true,
+						},
+					},
+					{
+						path: "stMap",
+						component: () =>
+							import(
+								"@/views/student/coursrIndex/courseList.vue"
+							),
+						name: "stMap",
+						meta: {
+							title: "游学地图",
+							noCache: true,
+						},
+					},
+					{
+						path: "stWithBook",
+						component: () =>
+							import(
+								"@/views/student/coursrIndex/courseList.vue"
+							),
+						name: "writingForustWithBookm",
+						meta: {
+							title: "跟着课本游世界",
+							noCache: true,
+						},
+					},
+				],
+			},
+			{
+				//写作论坛
+				path: "/student/writing",
+				component: () => import("@/views/student/subNav.vue"),
+				redirect: "/student/writing/writingTrain",
+				name: "writing",
+				children: [
+					{
+						path: "writingTrain",
+						component: () =>
+							import(
+								"@/views/student/coursrIndex/courseList.vue"
+							),
+						name: "writingTrain",
+						meta: {
+							title: "写作训练",
+							noCache: true,
+						},
+					},
+					{
+						path: "textbookExercise",
+						component: () =>
+							import(
+								"@/views/student/coursrIndex/courseList.vue"
+							),
+						name: "textbookExercise",
+						meta: {
+							title: "课本习作",
+							noCache: true,
+						},
+					},
+					{
+						path: "literaryCreation",
+						component: () =>
+							import(
+								"@/views/student/coursrIndex/courseList.vue"
+							),
+						name: "literaryCreation",
+						meta: {
+							title: "文学创作",
+							noCache: true,
+						},
+					},
+					{
+						path: "topTeacherClass",
+						component: () =>
+							import(
+								"@/views/student/coursrIndex/courseList.vue"
+							),
+						name: "topTeacherClass",
+						meta: {
+							title: "名师课堂",
+							noCache: true,
+						},
+					},
+					{
+						path: "writingForum",
+						component: () =>
+							import(
+								"@/views/student/coursrIndex/courseList.vue"
+							),
+						name: "writingForum",
+						meta: {
+							title: "写作论坛",
+							noCache: true,
+						},
+					},
+				],
+			},
+			{
+				//听（学生端）
+				path: "/listen_student",
+				name: "listen_student",
+				component: () => import("@/views/student/listen/index.vue"),
+				meta: {
+					title: "听/试听",
 					noCache: true,
 				},
 			},
