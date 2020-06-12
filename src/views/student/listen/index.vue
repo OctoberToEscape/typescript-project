@@ -297,6 +297,7 @@ export default class StudentListen extends Vue {
 	private goStudy(val: any): void {
 		// 记录此刻tab
 		sessionStorage.sct = JSON.stringify(this.sct);
+
 		if (val.type == "listen_child") {
 			this.dialogVisible = false;
 		} else {
