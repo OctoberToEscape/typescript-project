@@ -414,14 +414,18 @@ export default class StudentExam extends Vue {
 	private goStudy(val: { [key: string]: string }): void {
 		// 记录此刻tab
 		sessionStorage.sct = JSON.stringify(this.sct);
-		if (val.type == "exam") {
-			this.dialogVisible = false;
-		} else {
+
+		if (val.type == "exam") this.dialogVisible = false;
+		else if (val.type == "write")
+			this.$router.push({
+				name: val.type,
+				query: { id: val.id, title: val.title, isTest: "isTest" },
+			});
+		else
 			this.$router.push({
 				name: val.type,
 				query: { id: val.id, title: val.title },
 			});
-		}
 	}
 	private goRead(): void {
 		var data: Dictionary<any> = {

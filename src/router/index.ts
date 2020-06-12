@@ -437,12 +437,22 @@ const routes: Array<RouteConfig> = [
 				},
 			},
 			{
-				//听（学生端）
+				//测试（学生端）
 				path: "exam",
 				name: "exam",
 				component: () => import("@/views/student/exam/index.vue"),
 				meta: {
 					title: "测试",
+					noCache: true,
+				},
+			},
+			{
+				//涂鸦
+				path: "write",
+				name: "write",
+				component: () => import("@/views/student/write/index.vue"),
+				meta: {
+					title: "涂鸦",
 					noCache: true,
 				},
 			},
