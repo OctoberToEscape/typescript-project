@@ -71,6 +71,7 @@
 				class="dialog-wrapper"
 				:visible.sync="dialogVisible"
 				width="680px"
+				:close-on-click-modal="false"
 			>
 				<div class="dialog-body">
 					<template v-if="dialogMess.is_finished == 1"
@@ -102,6 +103,7 @@
 			<!-- 标注弹窗 -->
 			<el-dialog
 				class="dialog-header dialog-label"
+				:close-on-click-modal="false"
 				:visible.sync="dailogLabel"
 				title="标注"
 				width="380px"
@@ -121,6 +123,7 @@
 			<!-- 单词本 -->
 			<el-dialog
 				class="dialog-header dialog-word-list"
+				:close-on-click-modal="false"
 				:visible.sync="dailogWordList"
 				title="单词本"
 				width="600px"
@@ -187,6 +190,7 @@
 				<!-- 添加或编辑新单词 -->
 				<el-dialog
 					class="dialog-header dialog-edit-word"
+					:close-on-click-modal="false"
 					:visible.sync="dailogAddWord"
 					width="605px"
 					title="单词本"
@@ -469,7 +473,7 @@ export default class StudentWrite extends Vue {
 	}
 
 	//贴画撤销
-	private handleReset() {
+	private handleReset(): void {
 		if (this.coord.length) this.coord.pop();
 		else
 			this.$message({
@@ -549,7 +553,7 @@ export default class StudentWrite extends Vue {
 	}
 
 	//知识力弹窗底部按钮
-	private goStudy(val: any): void {
+	private goStudy(val: { [key: string]: string }): void {
 		sessionStorage.sct = JSON.stringify(this.sct);
 		// 去考试
 		if (val.type == "write") {
@@ -568,7 +572,7 @@ export default class StudentWrite extends Vue {
 			params: {
 				page: this.wordListPage.page,
 			},
-		}).then((res) => {
+		}).then((res: any): void => {
 			if (res.code == 0) {
 				// reset
 				this.editWordId = null;
@@ -588,10 +592,10 @@ export default class StudentWrite extends Vue {
 	}
 
 	// 去编辑单词
-	private editWord(id: any, index: any): void {
+	private editWord(id: string, index: number): void {
 		this.dailogAddWord = true;
 		this.editWordId = id;
-		wordDetail(this.editWordId).then((res) => {
+		wordDetail(this.editWordId).then((res: any): void => {
 			if (res.code == 0) {
 				this.editWordForm = res.data;
 			}
@@ -599,8 +603,8 @@ export default class StudentWrite extends Vue {
 	}
 
 	//删除单词
-	private deleteWord(id: any): any {
-		deleteWords(id).then((res: any) => {
+	private deleteWord(id: string): void {
+		deleteWords(id).then((res: any): void => {
 			if (res.code == 0) {
 				// 删除成功
 				this.getWordList();
@@ -609,12 +613,12 @@ export default class StudentWrite extends Vue {
 	}
 
 	//重置表单
-	resetForm() {
+	private resetForm(): void {
 		(this.$refs["editWordForm"] as ElForm).resetFields();
 	}
 
 	// 提交单词表单
-	submitWord() {
+	private submitWord(): void {
 		(this.$refs["editWordForm"] as ElForm).validate((valid: boolean):
 			| void
 			| boolean => {
@@ -629,7 +633,7 @@ export default class StudentWrite extends Vue {
 				};
 				if (this.editWordId) {
 					// 编辑单词
-					editWords(this.editWordId, data).then((res) => {
+					editWords(this.editWordId, data).then((res: any): void => {
 						if (res.code == 0) {
 							// 编辑成功
 							this.dailogAddWord = false;
@@ -638,7 +642,7 @@ export default class StudentWrite extends Vue {
 					});
 				} else {
 					// 添加单词
-					addWords(data).then((res) => {
+					addWords(data).then((res: any): void => {
 						if (res.code == 0) {
 							// 添加成功
 							this.dailogAddWord = false;

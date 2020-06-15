@@ -63,31 +63,31 @@ export const getPower = (data: {
 };
 
 // 获取单词本;
-export const getWords = (data: any) => {
+export const getWords = (data: any): any => {
 	return service.get("/words", data).then((result) => {
 		return result.data;
 	});
 };
 // 添加单词
-export const addWords = (data: any) => {
+export const addWords = (data: any): any => {
 	return service.post("/words", data).then((result) => {
 		return result.data;
 	});
 };
 // 单词详情
-export const wordDetail = (wordId: any) => {
+export const wordDetail = (wordId: any): any => {
 	return service.get("/words/" + wordId).then((result) => {
 		return result.data;
 	});
 };
 // 编辑单词
-export const editWords = (wordId: any, data: any) => {
+export const editWords = (wordId: any, data: any): any => {
 	return service.put("/words/" + wordId, data).then((result) => {
 		return result.data;
 	});
 };
 // 删除单词
-export const deleteWords = (wordId: any) => {
+export const deleteWords = (wordId: any): any => {
 	return service.delete("/words/" + wordId).then((result) => {
 		return result.data;
 	});
