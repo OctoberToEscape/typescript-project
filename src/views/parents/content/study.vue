@@ -160,8 +160,8 @@ export default class indent extends Vue {
 	}
 
 	//销毁监听
-	destroyted() {
-		window.removeEventListener("scroll", this.onScroll);
+	destroyed() {
+		window.removeEventListener("scroll", this.onScroll, true);
 	}
 }
 </script>
