@@ -26,6 +26,8 @@
 						@handleGraffiti="handleGraffiti"
 						@handleWord="handleWord"
 						@handleMark="handleMark"
+						@recorde="handleRecorde"
+						:playAudio_click="playAudio_click"
 					/>
 					<!-- 涂鸦 -->
 					<img
@@ -300,6 +302,7 @@ import {
 	components: { Tag, Empty, Control, studentCourseStatus },
 })
 export default class StudentWrite extends Vue {
+	private playAudio_click: boolean = false;
 	private sc: string = "";
 	private sct: { [key: string]: string } = {};
 	private title: string | (string | null)[] = "";
@@ -327,7 +330,7 @@ export default class StudentWrite extends Vue {
 		pageSize: 8,
 	};
 	private dailogAddWord: boolean = false;
-	private editWordId: any = null;
+	private editWordId: string | null = null;
 	private editWordForm: { [key: string]: string } = {
 		word: "",
 		word_type: "",
@@ -470,6 +473,18 @@ export default class StudentWrite extends Vue {
 		if (this.index < this.imgList.length - 1) this.index++;
 		this.addChildControl("next");
 		this.getChildHistory();
+	}
+
+	//录音部分
+	private handleRecorde(val: number): void {
+		if (val == 0) {
+			console.log("开始录音");
+		} else if (val == 1) {
+			console.log("撤销录音");
+		} else if (val == 2) {
+			console.log("播放暂停");
+			this.playAudio_click = !this.playAudio_click;
+		}
 	}
 
 	//贴画撤销

@@ -62,37 +62,6 @@ export const getPower = (data: {
 	});
 };
 
-// 获取单词本;
-export const getWords = (data: any): any => {
-	return service.get("/words", data).then((result) => {
-		return result.data;
-	});
-};
-// 添加单词
-export const addWords = (data: any): any => {
-	return service.post("/words", data).then((result) => {
-		return result.data;
-	});
-};
-// 单词详情
-export const wordDetail = (wordId: any): any => {
-	return service.get("/words/" + wordId).then((result) => {
-		return result.data;
-	});
-};
-// 编辑单词
-export const editWords = (wordId: any, data: any): any => {
-	return service.put("/words/" + wordId, data).then((result) => {
-		return result.data;
-	});
-};
-// 删除单词
-export const deleteWords = (wordId: any): any => {
-	return service.delete("/words/" + wordId).then((result) => {
-		return result.data;
-	});
-};
-
 // export const setFile = (data) => {
 // 	//录音上传获得链接
 // 	return uploadService({
@@ -110,3 +79,40 @@ export const deleteWords = (wordId: any): any => {
 // 		data,
 // 	});
 // };
+
+// 获取单词本;
+export const getWords = (data: {
+	[key: string]: { [key: string]: number };
+}): any => {
+	return service.get("/words", data).then((result) => {
+		return result.data;
+	});
+};
+
+// 添加单词
+export const addWords = (data: { [key: string]: string }): any => {
+	return service.post("/words", data).then((result) => {
+		return result.data;
+	});
+};
+// 单词详情
+export const wordDetail = (wordId: string): any => {
+	return service.get("/words/" + wordId).then((result) => {
+		return result.data;
+	});
+};
+// 编辑单词
+export const editWords = (
+	wordId: string,
+	data: { [key: string]: string }
+): any => {
+	return service.put("/words/" + wordId, data).then((result) => {
+		return result.data;
+	});
+};
+// 删除单词
+export const deleteWords = (wordId: string): any => {
+	return service.delete("/words/" + wordId).then((result) => {
+		return result.data;
+	});
+};

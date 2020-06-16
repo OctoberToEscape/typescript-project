@@ -18,10 +18,16 @@
 			<li
 				v-for="(item, index) in student_control.middle.radio"
 				:key="index.id"
-				:style="{
-					backgroundImage: 'url(' + item + ')',
-				}"
-			></li>
+				@click="recorde(index)"
+			>
+				<img :src="item" />
+				<img
+					src="@/assets/images/audio_play.png"
+					v-if="index == 2"
+					class="play_audio"
+					v-show="playAudio_click"
+				/>
+			</li>
 		</ul>
 		<!-- 涂鸦 -->
 		<ul class="graffiti" v-if="graffiti">
@@ -60,11 +66,12 @@
 	</div>
 </template>
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Prop } from "vue-property-decorator";
 @Component({
 	name: "write-control",
 })
 export default class WriteControl extends Vue {
+	@Prop({ default: false }) private playAudio_click!: boolean;
 	private recordeShow: boolean = false;
 	private graffiti: boolean = false;
 	private graffiti2: boolean = false;
@@ -171,6 +178,12 @@ export default class WriteControl extends Vue {
 			this.$emit("handleReset");
 		}
 	}
+
+	//录音
+	private recorde(index: number): void {
+		this.$emit("recorde", index);
+	}
+
 	//选择贴画
 	private handleGraffiti(type: string, index: number): void {
 		this.num = index;
@@ -252,10 +265,20 @@ export default class WriteControl extends Vue {
 		li {
 			width: 100%;
 			height: 40px;
-			background-repeat: no-repeat;
-			background-size: contain;
-			background-position: top center;
 			cursor: pointer;
+			position: relative;
+			img {
+				width: 100%;
+				height: 100%;
+				display: block;
+			}
+			.play_audio {
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				bottom: 1%;
+				left: 0%;
+			}
 		}
 	}
 	.graffiti {
