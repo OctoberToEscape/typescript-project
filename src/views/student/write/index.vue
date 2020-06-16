@@ -320,7 +320,7 @@ export default class StudentWrite extends Vue {
 	private labelContent: string = "";
 	private labelIcon: boolean = false;
 	private dailogWordList: boolean = false;
-	private wordList: [] = [];
+	private wordList: Array<{ [key: string]: string }> = [];
 	private activeWord: string = "";
 	private activePage: any = null;
 	private wordListPage: { [key: string]: number } = {
