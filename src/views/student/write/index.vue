@@ -298,6 +298,7 @@ import {
 	wordDetail,
 	editWords,
 	deleteWords,
+	setFile,
 } from "@/api/student/write";
 import element from "../../../plugins/element";
 @Component({
@@ -309,6 +310,7 @@ export default class StudentWrite extends Vue {
 	private canRecorder: boolean = false;
 	private recorderTime: string = "00:00";
 	private resumePlay: boolean = false;
+	private file: any = null;
 	private playAudio_click: boolean = false;
 	private sc: string = "";
 	private sct: { [key: string]: string } = {};
@@ -500,11 +502,31 @@ export default class StudentWrite extends Vue {
 					};
 				});
 			} else {
-				this.recorder.getWAVBlob();
+				this.file = this.recorder.getWAVBlob();
 				this.$message({
 					type: "info",
 					message: "结束录音",
 				});
+
+				var reader = new FileReader();
+				var rs = reader.readAsDataURL(this.file);
+
+				reader.onload = (e: any) => {
+					// console.log(e.target.result);
+					var recorderSrc = e.target.result;
+					let recorderFile = this.dataURLtoFile(recorderSrc, "file");
+					let fd: any = new FormData();
+					fd.append("file", recorderFile);
+					setFile(fd).then((res: any) => {
+						console.log(res);
+					});
+					// const instance = axios.create();
+					// instance
+					// 	.post(process.env.VUE_APP_BASE_API + "/upload", fd)
+					// 	.then((res) => {
+					// 		this.audio_url = res.data.data.audio_url;
+					// 	});
+				};
 			}
 		} else if (val == 1) {
 			this.canRecorder = false;
@@ -555,6 +577,18 @@ export default class StudentWrite extends Vue {
 		}
 	}
 
+	//将base64转换为文件
+	private dataURLtoFile(dataurl: any, filename: string): object {
+		var arr = dataurl.split(","),
+			mime = arr[0].match(/:(.*?);/)[1],
+			bstr = atob(arr[1]),
+			n = bstr.length,
+			u8arr = new Uint8Array(n);
+		while (n--) {
+			u8arr[n] = bstr.charCodeAt(n);
+		}
+		return new File([u8arr], filename, { type: mime });
+	}
 	//贴画撤销
 	private handleReset(): void {
 		if (this.coord.length) this.coord.pop();

@@ -62,14 +62,14 @@ export const getPower = (data: {
 	});
 };
 
-// export const setFile = (data) => {
-// 	//录音上传获得链接
-// 	return uploadService({
-// 		method: "post",
-// 		url: "/upload",
-// 		data,
-// 	});
-// };
+export const setFile = (data: any): any => {
+	//录音上传获得链接
+	return service({
+		method: "post",
+		url: "/upload",
+		data,
+	});
+};
 
 // export const uploadAudio = (data) => {
 // 	//添加录音
