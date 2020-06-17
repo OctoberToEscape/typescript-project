@@ -11,6 +11,8 @@ import "@/icons";
 
 const QRCode = require("qrcodejs2");
 Vue.prototype.QRCode = QRCode;
+const Recorder = require("js-audio-recorder");
+Vue.prototype.Recorder = Recorder;
 
 Vue.use(Element);
 Vue.use(install);

@@ -28,6 +28,7 @@
 					v-show="playAudio_click"
 				/>
 			</li>
+			<span>{{ recorderTime }}</span>
 		</ul>
 		<!-- 涂鸦 -->
 		<ul class="graffiti" v-if="graffiti">
@@ -72,6 +73,7 @@ import { Component, Vue, Prop } from "vue-property-decorator";
 })
 export default class WriteControl extends Vue {
 	@Prop({ default: false }) private playAudio_click!: boolean;
+	@Prop({ default: "00:00" }) private recorderTime!: string;
 	private recordeShow: boolean = false;
 	private graffiti: boolean = false;
 	private graffiti2: boolean = false;
@@ -279,6 +281,15 @@ export default class WriteControl extends Vue {
 				bottom: 1%;
 				left: 0%;
 			}
+		}
+		span {
+			display: block;
+			position: absolute;
+			top: 10%;
+			right: -70px;
+			padding: 0px 10px;
+			border-radius: 5px;
+			background: #ffffff;
 		}
 	}
 	.graffiti {

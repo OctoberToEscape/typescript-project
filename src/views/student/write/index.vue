@@ -28,6 +28,7 @@
 						@handleMark="handleMark"
 						@recorde="handleRecorde"
 						:playAudio_click="playAudio_click"
+						:recorderTime="recorderTime"
 					/>
 					<!-- 涂鸦 -->
 					<img
@@ -276,6 +277,7 @@
 	</el-container>
 </template>
 <script lang="ts">
+import { realFormatSecond } from "@/utils/common";
 import { StudentModule } from "@/store/module/student";
 import { Component, Vue, Watch } from "vue-property-decorator";
 import Tag from "@/components/listen-pageback/index.vue";
@@ -297,11 +299,16 @@ import {
 	editWords,
 	deleteWords,
 } from "@/api/student/write";
+import element from "../../../plugins/element";
 @Component({
 	name: "student-write",
 	components: { Tag, Empty, Control, studentCourseStatus },
 })
 export default class StudentWrite extends Vue {
+	private recorder: any = new Vue.prototype.Recorder();
+	private canRecorder: boolean = false;
+	private recorderTime: string = "00:00";
+	private resumePlay: boolean = false;
 	private playAudio_click: boolean = false;
 	private sc: string = "";
 	private sct: { [key: string]: string } = {};
@@ -478,12 +485,73 @@ export default class StudentWrite extends Vue {
 	//录音部分
 	private handleRecorde(val: number): void {
 		if (val == 0) {
-			console.log("开始录音");
+			this.canRecorder = !this.canRecorder;
+			if (this.canRecorder) {
+				this.resumePlay = false;
+				this.recorder.start().then(() => {
+					//监听时长
+					this.recorder.onprocess = (duration: number): void => {
+						this.recorderTime = realFormatSecond(duration);
+					};
+					//监听播放结束
+					this.recorder.onplayend = (): void => {
+						this.playAudio_click = false;
+						this.resumePlay = false;
+					};
+				});
+			} else {
+				this.recorder.getWAVBlob();
+				this.$message({
+					type: "info",
+					message: "结束录音",
+				});
+			}
 		} else if (val == 1) {
-			console.log("撤销录音");
+			this.canRecorder = false;
+			this.recorder.stop();
+			this.recorder.destroy().then((): void => {
+				this.recorderTime = "00:00";
+			});
 		} else if (val == 2) {
-			console.log("播放暂停");
-			this.playAudio_click = !this.playAudio_click;
+			//判断有录音与否
+			if (this.recorderTime !== "00:00") {
+				//判断录音录完与否
+				if (this.canRecorder) {
+					this.$message({
+						type: "info",
+						message: "正在录音中,请先结束录音",
+					});
+				} else {
+					this.playAudio_click = !this.playAudio_click;
+				}
+			} else {
+				this.$message({
+					type: "info",
+					message: "暂无录音",
+				});
+			}
+
+			if (this.playAudio_click) {
+				//有录音
+				if (this.canRecorder) {
+					this.$message({
+						type: "info",
+						message: "正在录音中,请先结束录音",
+					});
+				} else {
+					//暂停后的继续播放
+					if (this.resumePlay) {
+						this.recorder.resumePlay();
+					} else {
+						//一开始播放
+						this.recorder.play();
+					}
+				}
+			} else {
+				//暂停
+				this.resumePlay = true;
+				this.recorder.pausePlay();
+			}
 		}
 	}
 
@@ -739,7 +807,6 @@ export default class StudentWrite extends Vue {
 			.course-img {
 				width: 1000px;
 				height: 750px;
-				background: #cccccc;
 				margin: auto;
 				position: relative;
 				.card {

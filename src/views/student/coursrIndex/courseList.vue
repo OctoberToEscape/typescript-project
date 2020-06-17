@@ -267,7 +267,7 @@ export default class CourseList extends Vue {
 	.link-a {
 		position: absolute;
 		top: -35px;
-		right: 50px;
+		right: 135px;
 		width: 240px;
 		height: 30px;
 		border-radius: 13px;
