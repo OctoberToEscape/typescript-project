@@ -3,7 +3,10 @@ import VueRouter, { RouteConfig } from "vue-router";
 
 Vue.use(VueRouter);
 
-const isBuy: string = localStorage.getItem("is_buy") ? "/student" : "/";
+const isBuy: string | null = localStorage.getItem("is_buy")
+	? "/student"
+	: "/courseLearning";
+
 
 const routes: Array<RouteConfig> = [
 	{
