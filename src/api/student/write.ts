@@ -72,15 +72,15 @@ export const setFile = (data: any): any => {
 };
 
 export const uploadAudio = (data: {
-			[key: string]: string | number | (string | null)[];
-		}): any => {
-			//添加录音
-			return service({
-				method: "post",
-				url: "/tape_audio",
-				data,
-			});
-		};
+	[key: string]: string | number | (string | null)[];
+}): any => {
+	//添加录音
+	return service({
+		method: "post",
+		url: "/tape_audio",
+		data,
+	});
+};
 
 // 获取单词本;
 export const getWords = (data: {
