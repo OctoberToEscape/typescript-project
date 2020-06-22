@@ -510,22 +510,14 @@ export default class StudentWrite extends Vue {
 
 				var reader = new FileReader();
 				var rs = reader.readAsDataURL(this.file);
-
 				reader.onload = (e: any) => {
-					// console.log(e.target.result);
 					var recorderSrc = e.target.result;
 					let recorderFile = this.dataURLtoFile(recorderSrc, "file");
 					let fd: any = new FormData();
 					fd.append("file", recorderFile);
-					setFile(fd).then((res: any) => {
-						console.log(res);
-					});
-					// const instance = axios.create();
-					// instance
-					// 	.post(process.env.VUE_APP_BASE_API + "/upload", fd)
-					// 	.then((res) => {
-					// 		this.audio_url = res.data.data.audio_url;
-					// 	});
+					// setFile(fd).then((res: any) => {
+					// 	console.log(res);
+					// });
 				};
 			}
 		} else if (val == 1) {
@@ -571,8 +563,10 @@ export default class StudentWrite extends Vue {
 				}
 			} else {
 				//暂停
-				this.resumePlay = true;
-				this.recorder.pausePlay();
+				if (!this.canRecorder) {
+					this.resumePlay = true;
+					this.recorder.pausePlay();
+				}
 			}
 		}
 	}
