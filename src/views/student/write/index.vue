@@ -661,10 +661,19 @@ export default class StudentWrite extends Vue {
 			content: this.labelContent, //标注内容
 			graffities: this.coord, //小学生涂鸦数组
 		});
+
 		//提交操作图片下标记
 		set_history({
 			course_id: this.course_id,
 			img_id: this.imgList[this.index].banner_id,
+		});
+
+		//提交录音
+		uploadAudio({
+			course_id: this.course_id, //课程的id
+			img_id: this.imgList[this.index].banner_id, //当前图片的id
+			audio_url: this.audio_url, //录音链接
+			duration: this.recorderTime,
 		});
 		this.interaction();
 	}

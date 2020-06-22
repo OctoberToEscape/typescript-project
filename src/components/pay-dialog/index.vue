@@ -111,11 +111,6 @@ export default class payDialog extends Vue {
 	@Prop({ default: true }) private show!: boolean;
 	@Prop({ default: 0 }) private active!: number;
 
-	/**
-	 * @data
-	 * @return
-	 */
-
 	private my_show: boolean = this.show;
 	private checkList: Array<string> = [];
 	private dialogDate: {
