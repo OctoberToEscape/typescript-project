@@ -274,6 +274,7 @@
 				</el-dialog>
 			</el-dialog>
 		</el-main>
+		<audio id="audioVoice" v-show="false" ref="audio"></audio>
 	</el-container>
 </template>
 <script lang="ts">
@@ -299,6 +300,7 @@ import {
 	editWords,
 	deleteWords,
 	setFile,
+	uploadAudio,
 } from "@/api/student/write";
 import element from "../../../plugins/element";
 @Component({
@@ -312,6 +314,7 @@ export default class StudentWrite extends Vue {
 	private resumePlay: boolean = false;
 	private file: any = null;
 	private playAudio_click: boolean = false;
+	private audio_url: string = "";
 	private sc: string = "";
 	private sct: { [key: string]: string } = {};
 	private title: string | (string | null)[] = "";
@@ -381,7 +384,9 @@ export default class StudentWrite extends Vue {
 			this.browsingTime++;
 		}, 1000);
 	}
-
+	mounted() {
+		(this.$refs.audio as any).addEventListener("ended", this.audio_ended);
+	}
 	//拿数据列表
 	private getCourseImg(id: string | (string | null)[]): void {
 		getImages(id).then((res: any): void => {
@@ -424,6 +429,13 @@ export default class StudentWrite extends Vue {
 				this.coord = res.data.data.graffities;
 				this.labelContent = res.data.data.content;
 				this.labelIcon = res.data.data.content != "";
+				//无操作时候的audioUrl
+				this.audio_url = res.data.data.audio_url;
+				if (res.data.data.play_audio_url) {
+					this.recorderTime = res.data.data.audio_duration;
+					(this.$refs.audio as any).src =
+						res.data.data.play_audio_url;
+				}
 			});
 		}
 	}
@@ -441,10 +453,18 @@ export default class StudentWrite extends Vue {
 			graffities: this.coord, //小学生涂鸦数组
 		});
 
+		//提交录音
+		uploadAudio({
+			course_id: this.course_id, //课程的id
+			img_id: this.imgList[this.index + num].banner_id, //当前图片的id
+			audio_url: this.audio_url, //录音链接
+			duration: this.recorderTime,
+		});
+
 		//提交操作图片下标记
 		set_history({
 			course_id: this.course_id,
-			img_id: this.imgList[this.index].banner_id,
+			img_id: this.imgList[this.index + num].banner_id,
 		});
 	}
 
@@ -463,6 +483,14 @@ export default class StudentWrite extends Vue {
 				course_id: this.course_id,
 				img_id: this.imgList[this.index].banner_id,
 			});
+
+			//提交录音
+			uploadAudio({
+				course_id: this.course_id, //课程的id
+				img_id: this.imgList[this.index].banner_id, //当前图片的id
+				audio_url: this.audio_url, //录音链接
+				duration: this.recorderTime,
+			});
 		}
 		let url = this.isTest
 			? "/student/exam?id=" + this.course_id + "&title=" + this.title
@@ -475,6 +503,7 @@ export default class StudentWrite extends Vue {
 		if (this.index != 0 && this.index > 0) this.index--;
 		this.addChildControl("prev");
 		this.getChildHistory();
+		this.resetRecorder();
 	}
 
 	//下一个
@@ -482,11 +511,13 @@ export default class StudentWrite extends Vue {
 		if (this.index < this.imgList.length - 1) this.index++;
 		this.addChildControl("next");
 		this.getChildHistory();
+		this.resetRecorder();
 	}
 
 	//录音部分
 	private handleRecorde(val: number): void {
 		if (val == 0) {
+			(this.$refs.audio as any).removeAttribute("src");
 			this.canRecorder = !this.canRecorder;
 			if (this.canRecorder) {
 				this.resumePlay = false;
@@ -515,17 +546,16 @@ export default class StudentWrite extends Vue {
 					let recorderFile = this.dataURLtoFile(recorderSrc, "file");
 					let fd: any = new FormData();
 					fd.append("file", recorderFile);
-					// setFile(fd).then((res: any) => {
-					// 	console.log(res);
-					// });
+					setFile(fd).then((res: any) => {
+						if (res.data.code == 0) {
+							//录音过的链接
+							this.audio_url = res.data.data.audio_url;
+						}
+					});
 				};
 			}
 		} else if (val == 1) {
-			this.canRecorder = false;
-			this.recorder.stop();
-			this.recorder.destroy().then((): void => {
-				this.recorderTime = "00:00";
-			});
+			this.resetRecorder();
 		} else if (val == 2) {
 			//判断有录音与否
 			if (this.recorderTime !== "00:00") {
@@ -545,30 +575,53 @@ export default class StudentWrite extends Vue {
 				});
 			}
 
-			if (this.playAudio_click) {
-				//有录音
-				if (this.canRecorder) {
-					this.$message({
-						type: "info",
-						message: "正在录音中,请先结束录音",
-					});
+			if ((this.$refs.audio as any).src) {
+				if (this.playAudio_click) {
+					(this.$refs.audio as any).play();
 				} else {
-					//暂停后的继续播放
-					if (this.resumePlay) {
-						this.recorder.resumePlay();
-					} else {
-						//一开始播放
-						this.recorder.play();
-					}
+					(this.$refs.audio as any).pause();
 				}
 			} else {
-				//暂停
-				if (!this.canRecorder) {
-					this.resumePlay = true;
-					this.recorder.pausePlay();
+				if (this.playAudio_click) {
+					//有录音
+					if (this.canRecorder) {
+						this.$message({
+							type: "info",
+							message: "正在录音中,请先结束录音",
+						});
+					} else {
+						//暂停后的继续播放
+						if (this.resumePlay) {
+							this.recorder.resumePlay();
+						} else {
+							//一开始播放
+							this.recorder.play();
+						}
+					}
+				} else {
+					//暂停
+					if (!this.canRecorder) {
+						this.resumePlay = true;
+						this.recorder.pausePlay();
+					}
 				}
 			}
 		}
+	}
+	//监听原生audio
+	private audio_ended() {
+		this.playAudio_click = false;
+	}
+	//重置录音
+	private resetRecorder(): void {
+		(this.$refs.audio as any).removeAttribute("src");
+		this.canRecorder = false;
+		this.playAudio_click = false;
+		this.resumePlay = false;
+		this.recorder.stop();
+		this.recorder.destroy().then((): void => {
+			this.recorderTime = "00:00";
+		});
 	}
 
 	//将base64转换为文件
