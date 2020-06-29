@@ -62,7 +62,7 @@ export const getPower = (data: {
 	});
 };
 
-export const setFile = (data: any): any => {
+export const setFile = (data: object): any => {
 	//录音上传获得链接
 	return service({
 		method: "post",

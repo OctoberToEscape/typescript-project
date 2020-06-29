@@ -521,7 +521,7 @@ export default class StudentWrite extends Vue {
 			this.canRecorder = !this.canRecorder;
 			if (this.canRecorder) {
 				this.resumePlay = false;
-				this.recorder.start().then(() => {
+				this.recorder.start().then((): void => {
 					//监听时长
 					this.recorder.onprocess = (duration: number): void => {
 						this.recorderTime = realFormatSecond(duration);
@@ -541,12 +541,12 @@ export default class StudentWrite extends Vue {
 
 				var reader = new FileReader();
 				var rs = reader.readAsDataURL(this.file);
-				reader.onload = (e: any) => {
+				reader.onload = (e: any): void => {
 					var recorderSrc = e.target.result;
 					let recorderFile = this.dataURLtoFile(recorderSrc, "file");
 					let fd: any = new FormData();
 					fd.append("file", recorderFile);
-					setFile(fd).then((res: any) => {
+					setFile(fd).then((res: any): void => {
 						if (res.data.code == 0) {
 							//录音过的链接
 							this.audio_url = res.data.data.audio_url;
