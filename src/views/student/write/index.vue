@@ -622,7 +622,6 @@ export default class StudentWrite extends Vue {
 		this.recorder.destroy().then((): void => {
 			this.recorderTime = "00:00";
 		});
-		this.imgType = "0";
 	}
 
 	//将base64转换为文件
