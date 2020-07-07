@@ -146,7 +146,6 @@
 	</div>
 </template>
 <script lang="ts">
-// import store from "@/store";
 import { Component, Vue, Watch } from "vue-property-decorator";
 import { Dictionary } from "vue-router/types/router";
 import { getKnowledgePower } from "@/api/student/index";
