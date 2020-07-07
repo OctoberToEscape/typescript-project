@@ -71,39 +71,37 @@
 		</div>
 	</div>
 </template>
-<script>
-export default {
+<script lang="ts">
+import { Component, Vue, Prop, Watch } from "vue-property-decorator";
+
+@Component({
 	name: "studentCourseStatus",
-	props: ["inf"],
-	data() {
-		return {
-			stateInfo: {},
-		};
-	},
-	methods: {
-		goEmit(type, id, title) {
-			let emitObj = {
-				type,
-				id,
-				title,
-			};
-			this.$emit("goStudy", emitObj);
-		},
-	},
-	watch: {
-		inf: {
-			handler: function(val) {
-				this.stateInfo = Object.assign({}, this.inf);
-			},
-			deep: true,
-		},
-	},
+})
+export default class StudentCourseBtn extends Vue {
+	@Prop({ default: {} }) private inf!: {};
+
+	private stateInfo: {} = {};
+
 	created() {
 		this.stateInfo = Object.assign({}, this.inf);
-	},
-};
+	}
+
+	private goEmit(type: string, id: string, title: string): void {
+		let emitObj: { [key: string]: string } = {
+			type,
+			id,
+			title,
+		};
+		this.$emit("goStudy", emitObj);
+	}
+
+	@Watch("inf", { immediate: true, deep: true })
+	private changeInf(): void {
+		this.stateInfo = Object.assign({}, this.inf);
+	}
+}
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .student-course-status.status-list {
 	display: flex;
 	justify-content: center;
