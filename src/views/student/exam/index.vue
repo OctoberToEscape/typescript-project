@@ -72,7 +72,9 @@
 								type="textarea"
 								:rows="8"
 								v-model="item.user_answer"
-								:readonly="testClick == 1 &amp;&amp; item.user_is_right == 1"
+								:readonly="
+									testClick == 1 && item.user_is_right == 1
+								"
 								@input="isLastWriting(item.user_answer)"
 								@blur="lastWritingSub(item.user_answer)"
 							></el-input>
@@ -81,7 +83,10 @@
 								v-else="v-else"
 								type="textarea"
 								:rows="8"
-								:readonly="item.is_answered == 1 &amp;&amp; item.user_is_right == 1"
+								:readonly="
+									item.is_answered == 1 &&
+										item.user_is_right == 1
+								"
 								v-model="item.user_answer"
 							></el-input>
 						</div>
