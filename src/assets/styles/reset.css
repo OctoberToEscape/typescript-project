@@ -1,85 +1,85 @@
 * {
-	padding: 0;
-	margin: 0;
-	outline: 0;
+    padding: 0;
+    margin: 0;
+    outline: 0;
 }
 html {
-	overflow-y: scroll;
-	overflow-wrap: break-word;
+    overflow-y: scroll;
+    overflow-wrap: break-word;
 }
 body::after {
-	content: "\done";
-	position: absolute;
-	font-size: 0;
-	opacity: 0;
-	font-family: MaterialIcons;
-	@apply --fontfeature; /* fake for font load flash */
+    content: "\done";
+    position: absolute;
+    font-size: 0;
+    opacity: 0;
+    font-family: MaterialIcons;
+    @apply --fontfeature; /* fake for font load flash */
 }
 body,
 input,
 textarea,
 select,
 button {
-	font-family: "Helvetica Neue", "\5fae\8f6f\96c5\9ed1", sans-serif;
-	line-height: 1.667;
+    font-family: "Helvetica Neue", "\5fae\8f6f\96c5\9ed1", sans-serif;
+    line-height: 1.667;
 }
 input,
 textarea,
 table {
-	font-size: 1em;
-	font-family: inherit;
+    font-size: 1em;
+    font-family: inherit;
 }
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
 }
 img,
 fieldset,
 hr,
 iframe,
 button {
-	border: 0;
+    border: 0;
 }
 img,
 .img {
-	display: inline-block;
-	background: no-repeat;
-	vertical-align: top;
+    display: inline-block;
+    background: no-repeat;
+    vertical-align: top;
 }
 li {
-	list-style: none;
+    list-style: none;
 }
 button,
 .btn {
-	overflow: visible;
-	width: auto;
-	padding: 0;
-	box-sizing: content-box;
-	text-indent: 0;
-	outline: 0;
-	cursor: pointer;
-	border: 0;
-	background: none;
+    overflow: visible;
+    width: auto;
+    padding: 0;
+    box-sizing: content-box;
+    text-indent: 0;
+    outline: 0;
+    cursor: pointer;
+    border: 0;
+    background: none;
 }
 button::-moz-focus-inner,
 input::-moz-focus-inner {
-	padding: 0;
-	border: 0;
+    padding: 0;
+    border: 0;
 }
 sup,
 sub {
-	vertical-align: baseline;
+    vertical-align: baseline;
 }
 blockquote,
 q {
-	quotes: none;
+    quotes: none;
 }
 blockquote::before,
 blockquote::after,
 q:before,
 q::after {
-	content: "";
-	content: none;
+    content: "";
+    content: none;
 }
 h1,
 h2,
@@ -87,8 +87,8 @@ h3,
 h4,
 h5,
 h6 {
-	font-size: 1em;
-	font-weight: normal;
+    font-size: 1em;
+    font-weight: normal;
 }
 i,
 cite,
@@ -96,39 +96,39 @@ em,
 var,
 dfn,
 address {
-	font-style: normal;
+    font-style: normal;
 }
 b,
 strong {
-	font-weight: normal;
+    font-weight: normal;
 }
 textarea {
-	resize: vertical;
+    resize: vertical;
 }
 input,
 textarea {
-	user-select: text;
+    user-select: text;
 }
 object,
 canvas,
 embed {
-	display: block;
+    display: block;
 }
 a {
-	cursor: pointer;
+    cursor: pointer;
 }
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
-	box-shadow: 0 0 0px 1000px #fff inset;
-	-webkit-text-fill-color: inherit !important;
+    box-shadow: 0 0 0px 1000px #fff inset;
+    -webkit-text-fill-color: inherit !important;
 }
 label {
-	display: inline;
-	max-width: none;
-	/* margin-bottom: auto; */
-	font-weight: normal;
+    display: inline;
+    max-width: none;
+    /* margin-bottom: auto; */
+    font-weight: normal;
 }
 svg:not(:root) {
-	overflow: hidden;
+    overflow: hidden;
 }
