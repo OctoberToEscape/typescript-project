@@ -1,89 +1,89 @@
 //支付弹窗样式
 #indent-dialog .el-dialog {
-	border-radius: 5px;
+    border-radius: 5px;
 }
 
 #indent-dialog .el-dialog .el-dialog__body {
-	padding: 0 !important;
+    padding: 0 !important;
 }
 
 #indent-dialog .el-dialog__header {
-	padding: 0;
+    padding: 0;
 }
 
 #indent-dialog .el-dialog__header .el-dialog__headerbtn {
-	top: -6%;
-	right: -5%;
-	font-size: 24px;
+    top: -6%;
+    right: -5%;
+    font-size: 24px;
 }
 
 #indent-dialog .el-dialog__header .el-dialog__headerbtn .el-dialog__close {
-	color: #ffffff;
+    color: #ffffff;
 }
 
 //支付弹窗 step步骤条
 #indent-dialog .el-step__line {
-	position: absolute;
-	border-color: inherit;
-	background-color: #98cefa !important;
+    position: absolute;
+    border-color: inherit;
+    background-color: #98cefa !important;
 }
 #indent-dialog .el-step__head.is-process .el-step__icon.is-text {
-	background: #63a7f8 !important;
-	border: none !important;
-	font-size: 14px !important;
-	font-weight: normal !important;
-	color: #fff !important;
+    background: #63a7f8 !important;
+    border: none !important;
+    font-size: 14px !important;
+    font-weight: normal !important;
+    color: #fff !important;
 }
 
 #indent-dialog .el-step__title.is-process {
-	font-weight: normal !important;
-	font-size: 14px !important;
-	color: #63a7f8 !important;
+    font-weight: normal !important;
+    font-size: 14px !important;
+    color: #63a7f8 !important;
 }
 #indent-dialog .el-step__head.is-wait .el-step__icon.is-text {
-	background: #c0cddb !important;
-	border: none !important;
-	font-size: 14px !important;
-	font-weight: normal !important;
-	color: #fefefe !important;
+    background: #c0cddb !important;
+    border: none !important;
+    font-size: 14px !important;
+    font-weight: normal !important;
+    color: #fefefe !important;
 }
 #indent-dialog .el-step__title.is-wait {
-	color: #c0c4cc;
-	font-size: 14px !important;
-	font-weight: normal !important;
+    color: #c0c4cc;
+    font-size: 14px !important;
+    font-weight: normal !important;
 }
 
 #indent-dialog .el-step__head.is-finish .el-step__icon.is-text {
-	background: #c0cddb !important;
-	border: none !important;
-	color: #fff !important;
+    background: #c0cddb !important;
+    border: none !important;
+    color: #fff !important;
 }
 #indent-dialog .el-step__title.is-finish {
-	color: #999999 !important;
-	font-weight: normal !important;
-	font-size: 14px !important;
+    color: #999999 !important;
+    font-weight: normal !important;
+    font-size: 14px !important;
 }
 
 //复选框高亮
 #indent-dialog .el-checkbox__input.is-checked + .el-checkbox__label {
-	color: #333;
-	font-weight: bold;
+    color: #333;
+    font-weight: bold;
 }
 
 #indent-dialog .el-checkbox__label {
-	color: #333;
-	font-weight: normal;
+    color: #333;
+    font-weight: normal;
 }
 
 // 家长端课程和订单选项卡样式
 .indent .el-menu--horizontal > .el-menu-item.is-active {
-	border-top: 2px solid #409eff !important;
-	color: #409eff !important;
-	border-bottom: none !important;
-	border-left: 1px solid rgba(243, 243, 243, 1) !important;
-	border-right: 1px solid rgba(243, 243, 243, 1) !important;
+    border-top: 2px solid #409eff !important;
+    color: #409eff !important;
+    border-bottom: none !important;
+    border-left: 1px solid rgba(243, 243, 243, 1) !important;
+    border-right: 1px solid rgba(243, 243, 243, 1) !important;
 }
 
 .indent .el-menu-item {
-	transition: none !important;
+    transition: none !important;
 }

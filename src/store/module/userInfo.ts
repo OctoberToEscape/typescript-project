@@ -1,9 +1,9 @@
 import {
-	VuexModule,
-	Module,
-	Mutation,
-	Action,
-	getModule,
+    VuexModule,
+    Module,
+    Mutation,
+    Action,
+    getModule,
 } from "vuex-module-decorators";
 import store from "@/store";
 
@@ -15,52 +15,52 @@ import store from "@/store";
 
 @Module({ name: "userInfo", dynamic: true, namespaced: true, store })
 export default class UserInfo extends VuexModule {
-	//token
-	public Authorization: string | null = localStorage.getItem("Authorization")
-		? localStorage.getItem("Authorization")
-		: "";
-	//手机号
-	public telephone: string | null = localStorage.getItem("tel")
-		? localStorage.getItem("tel")
-		: "";
-	//端
-	public character: string | null = localStorage.getItem("character")
-		? localStorage.getItem("character")
-		: "";
+    //token
+    public Authorization: string | null = localStorage.getItem("Authorization")
+        ? localStorage.getItem("Authorization")
+        : "";
+    //手机号
+    public telephone: string | null = localStorage.getItem("tel")
+        ? localStorage.getItem("tel")
+        : "";
+    //端
+    public character: string | null = localStorage.getItem("character")
+        ? localStorage.getItem("character")
+        : "";
 
-	@Mutation
-	private CHANGE_AUTHORIZATION(Authorization: string): void {
-		this.Authorization = Authorization;
-		localStorage.setItem("Authorization", Authorization);
-	}
+    @Mutation
+    private CHANGE_AUTHORIZATION(Authorization: string): void {
+        this.Authorization = Authorization;
+        localStorage.setItem("Authorization", Authorization);
+    }
 
-	@Mutation
-	private CHANGE_TELEPHONE(telephone: string): void {
-		this.telephone = telephone;
-		localStorage.setItem("tel", telephone);
-	}
+    @Mutation
+    private CHANGE_TELEPHONE(telephone: string): void {
+        this.telephone = telephone;
+        localStorage.setItem("tel", telephone);
+    }
 
-	@Mutation
-	private CHANGE_CHARACTER(character: string): void {
-		//端
-		this.character = character;
-		localStorage.setItem("character", character);
-	}
+    @Mutation
+    private CHANGE_CHARACTER(character: string): void {
+        //端
+        this.character = character;
+        localStorage.setItem("character", character);
+    }
 
-	@Action
-	public getAuthorization(Authorization: string): void {
-		this.CHANGE_AUTHORIZATION(Authorization);
-	}
+    @Action
+    public getAuthorization(Authorization: string): void {
+        this.CHANGE_AUTHORIZATION(Authorization);
+    }
 
-	@Action
-	public getTelephone(telephone: string): void {
-		this.CHANGE_TELEPHONE(telephone);
-	}
+    @Action
+    public getTelephone(telephone: string): void {
+        this.CHANGE_TELEPHONE(telephone);
+    }
 
-	@Action
-	public getCharacter(character: string): void {
-		this.CHANGE_CHARACTER(character);
-	}
+    @Action
+    public getCharacter(character: string): void {
+        this.CHANGE_CHARACTER(character);
+    }
 }
 
 export const UserModule = getModule(UserInfo);
