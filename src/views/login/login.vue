@@ -136,13 +136,9 @@ export default class login extends Vue {
         value: string,
         callback: Function
     ): void => {
-        if (value === "") {
-            callback(new Error("请输入手机号"));
-        } else if (checkTel(value)) {
-            callback(new Error("手机号格式有误"));
-        } else {
-            callback(); //true
-        }
+        if (value === "") callback(new Error("请输入手机号"));
+        else if (checkTel(value)) callback(new Error("手机号格式有误"));
+        else callback(); //true
     };
     // 验证密码
     private validatePassword = (
@@ -150,11 +146,9 @@ export default class login extends Vue {
         value: string,
         callback: Function
     ): void => {
-        if (value === "") {
-            callback(new Error("请输入密码"));
-        } else {
-            callback();
-        }
+        if (value === "") callback(new Error("请输入密码"));
+        else if (value.length < 6) callback(new Error("密码不少于6位"));
+        else callback();
     };
 
     // 验证验证码
@@ -163,11 +157,8 @@ export default class login extends Vue {
         value: string,
         callback: Function
     ): void => {
-        if (value === "") {
-            return callback(new Error("请输入验证码"));
-        } else {
-            callback();
-        }
+        if (value === "") return callback(new Error("请输入验证码"));
+        else callback();
     };
 
     private model: string = "telphone";
