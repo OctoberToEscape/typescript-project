@@ -18,7 +18,10 @@
                     <router-link
                         target="_blank"
                         tag="a"
-                        :to="{ name: 'aboutAs', query: { flag: 3 } }"
+                        :to="{
+                            name: 'aboutAs',
+                            query: { flag: 3, from: 'about' },
+                        }"
                         >关于我们</router-link
                     >
                 </span>
