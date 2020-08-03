@@ -33,7 +33,7 @@ const routes: Array<RouteConfig> = [
         component: () => import("@/views/login/clause.vue"),
     },
     {
-        //服务协议
+        //考试大纲｜栏目说明
         path: "/aboutAs",
         name: "aboutAs",
         component: () => import("@/views/student/aboutAs.vue"),
@@ -44,7 +44,6 @@ const routes: Array<RouteConfig> = [
         name: "listen",
         component: () => import("@/views/parents/content/listen/index.vue"),
     },
-
     {
         //家长端
         path: "/",

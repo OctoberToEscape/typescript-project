@@ -6,11 +6,14 @@
             v-if="linkShow"
             target="_blank"
             tag="a"
-            :to="{ name: 'aboutAs', query: { flag: 2 } }"
+            :to="{ name: 'aboutAs', query: { flag: 2, from: 'about' } }"
             ><img src="@/assets/images/notice.gif" /><span
                 >语文教育改革的现状解读</span
             ></router-link
         >
+        <div class="link-c" v-if="linkC" @click="goColumnIntro">
+            <img src="@/assets/images/column.png" /><span>栏目说明</span>
+        </div>
         <!-- tab导航 -->
         <CourseTab
             :styleClass="tabClass"
@@ -89,7 +92,7 @@ import { Component, Vue, Watch } from "vue-property-decorator";
 import CourseTab from "@/components/student-tag/index.vue";
 import Empty from "@/components/empty/index.vue";
 import CourseItem from "@/components/student-course/index.vue";
-import { getTabs, getCourseData } from "@/api/student/course";
+import { getTabs, getCourseData, getColumnIntro } from "@/api/student/course";
 @Component({
     name: "student-course-body",
     components: {
@@ -108,6 +111,7 @@ export default class CourseList extends Vue {
     private tabClass: string = "student-tab1";
     private navType: number = 0;
     private linkShow: boolean = false;
+    private linkC: boolean = false;
     private tabLists: Array<any> = [];
     private dataList: Array<any> = [];
     private activeTab: string | null = null;
@@ -189,6 +193,8 @@ export default class CourseList extends Vue {
         this.dataList = [];
         // 获取tab标签;
         this.getNavTab();
+        // 获取栏目说明
+        this.getColumnIntro();
     }
 
     //获取tab标签内容
@@ -226,6 +232,7 @@ export default class CourseList extends Vue {
         });
     }
 
+    //弹窗按钮的跳转
     private goStudy(val: any): void {
         let stObj = {
             topName: this.topName,
@@ -240,6 +247,28 @@ export default class CourseList extends Vue {
             name: val.type,
             query: { id: val.id, title: val.title },
         });
+    }
+
+    //展示专栏与否
+    private getColumnIntro() {
+        getColumnIntro(this.categoryId, this.navType).then((res: any): void => {
+            if (res.data.code == 0) {
+                this.linkC = res.data.data.status == 1;
+            }
+        });
+    }
+
+    //跳转专栏介绍
+    private goColumnIntro() {
+        let routeData = this.$router.resolve({
+            name: "aboutAs",
+            query: {
+                id: this.categoryId,
+                type: String(this.navType),
+                from: "column",
+            },
+        });
+        window.open(routeData.href, "_blank");
     }
 
     @Watch("$route")
@@ -280,6 +309,24 @@ export default class CourseList extends Vue {
         cursor: pointer;
         img {
             width: 23px;
+            height: 20px;
+            margin: 0 10px;
+            vertical-align: -4px;
+        }
+    }
+    .link-c {
+        position: absolute;
+        top: -35px;
+        left: 125px;
+        width: 240px;
+        height: 30px;
+        font-size: 16px;
+        color: #f77a2f;
+        line-height: 30px;
+        text-decoration: none;
+        cursor: pointer;
+        img {
+            width: 20px;
             height: 20px;
             margin: 0 10px;
             vertical-align: -4px;

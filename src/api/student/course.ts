@@ -16,3 +16,14 @@ export const getCourseData = (id: string | null): any => {
         url: `/products/${id}`,
     });
 };
+
+export const getColumnIntro = (
+    id: string | null | (string | null)[],
+    type: number | string | (string | null)[]
+): any => {
+    //栏目说明
+    return service({
+        method: "get",
+        url: `/column_intro/${id}?type=${type}`,
+    });
+};
