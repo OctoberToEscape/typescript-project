@@ -11,6 +11,11 @@
                 >语文教育改革的现状解读</span
             ></router-link
         >
+        <!-- <router-link class="link-c" v-if="linkC" @click="goColumnIntro"
+            ><img src="@/assets/images/notice.gif" /><span
+                >栏目说明</span
+            ></router-link
+        > -->
         <!-- tab导航 -->
         <CourseTab
             :styleClass="tabClass"
@@ -89,7 +94,7 @@ import { Component, Vue, Watch } from "vue-property-decorator";
 import CourseTab from "@/components/student-tag/index.vue";
 import Empty from "@/components/empty/index.vue";
 import CourseItem from "@/components/student-course/index.vue";
-import { getTabs, getCourseData } from "@/api/student/course";
+import { getTabs, getCourseData, getColumnIntro } from "@/api/student/course";
 @Component({
     name: "student-course-body",
     components: {
@@ -108,6 +113,7 @@ export default class CourseList extends Vue {
     private tabClass: string = "student-tab1";
     private navType: number = 0;
     private linkShow: boolean = false;
+    // private linkC: boolean = false;
     private tabLists: Array<any> = [];
     private dataList: Array<any> = [];
     private activeTab: string | null = null;
@@ -275,6 +281,24 @@ export default class CourseList extends Vue {
         color: #f77a2f;
         margin-top: 1px;
         background: #fff;
+        line-height: 30px;
+        text-decoration: none;
+        cursor: pointer;
+        img {
+            width: 23px;
+            height: 20px;
+            margin: 0 10px;
+            vertical-align: -4px;
+        }
+    }
+    .link-c {
+        position: absolute;
+        top: -35px;
+        left: 125px;
+        width: 240px;
+        height: 30px;
+        font-size: 16px;
+        color: #f77a2f;
         line-height: 30px;
         text-decoration: none;
         cursor: pointer;

@@ -16,3 +16,9 @@ export const getCourseData = (id: string | null): any => {
         url: `/products/${id}`,
     });
 };
+
+export const getColumnIntro = (cId: any, data: {}): any => {
+    return service.get("/column_intro/" + cId, data).then((result) => {
+        return result.data;
+    });
+};

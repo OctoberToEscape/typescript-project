@@ -44,7 +44,15 @@ const routes: Array<RouteConfig> = [
         name: "listen",
         component: () => import("@/views/parents/content/listen/index.vue"),
     },
-
+    {
+        path: "/columnDeclare",
+        name: "columnDeclare",
+        component: () => import("@/views/student/columnDeclare.vue"),
+        meta: {
+            title: "栏目说明",
+            noCache: true,
+        },
+    },
     {
         //家长端
         path: "/",
