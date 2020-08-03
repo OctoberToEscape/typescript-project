@@ -17,8 +17,13 @@ export const getCourseData = (id: string | null): any => {
     });
 };
 
-export const getColumnIntro = (cId: any, data: {}): any => {
-    return service.get("/column_intro/" + cId, data).then((result) => {
-        return result.data;
+export const getColumnIntro = (
+    id: string | null | (string | null)[],
+    type: number | string | (string | null)[]
+): any => {
+    //栏目说明
+    return service({
+        method: "get",
+        url: `/column_intro/${id}?type=${type}`,
     });
 };

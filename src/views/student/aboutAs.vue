@@ -21,6 +21,7 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { getClause } from "@/api/login/login";
+import { getColumnIntro } from "@/api/student/course";
 @Component({
     name: "interpretation",
 })
@@ -29,16 +30,30 @@ export default class interpretation extends Vue {
     private content: string = "";
 
     created() {
-        getClause(this.$route.query.flag).then((res: any): void => {
-            //s如果有图片限制其宽为100%
-            const regex: any = new RegExp("<img", "gi");
-            res.data.data.content = res.data.data.content.replace(
-                regex,
-                `<img style="width: 100%; height: auto"`
+        if (this.$route.query.from === "about") {
+            getClause(this.$route.query.flag).then((res: any): void => {
+                //s如果有图片限制其宽为100%
+                const regex: any = new RegExp("<img", "gi");
+                res.data.data.content = res.data.data.content.replace(
+                    regex,
+                    `<img style="width: 100%; height: auto"`
+                );
+                this.title = res.data.data.title;
+                this.content = res.data.data.content;
+            });
+        } else {
+            getColumnIntro(this.$route.query.id, this.$route.query.type).then(
+                (res: any): void => {
+                    const regex: any = new RegExp("<img", "gi");
+                    res.data.data.content = res.data.data.content.replace(
+                        regex,
+                        `<img style="width: 100%; height: auto"`
+                    );
+                    this.title = res.data.data.title;
+                    this.content = res.data.data.content;
+                }
             );
-            this.title = res.data.data.title;
-            this.content = res.data.data.content;
-        });
+        }
     }
 }
 </script>

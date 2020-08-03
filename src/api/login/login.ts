@@ -60,3 +60,4 @@ export const userStatus = (): any => {
         url: "/user_card",
     });
 };
+
