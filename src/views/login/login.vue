@@ -125,11 +125,6 @@ import { UserModule } from "@/store/module/userInfo";
     },
 })
 export default class login extends Vue {
-    /**
-     * vue2.6 javascript 写法
-     * @data
-     * @return
-     */
     // 验证手机号
     private validateUsername = (
         rule: any,
@@ -179,11 +174,6 @@ export default class login extends Vue {
         password: [{ validator: this.validatePassword, trigger: "blur" }],
         code: [{ validator: this.validateCode, trigger: "blur" }],
     };
-
-    /**
-     * vue2.6 javascript
-     * @methods
-     */
 
     private goRegister(): void {
         this.$router.push({
