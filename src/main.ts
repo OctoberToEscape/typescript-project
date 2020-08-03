@@ -13,6 +13,8 @@ const QRCode = require("qrcodejs2");
 Vue.prototype.QRCode = QRCode;
 const Recorder = require("js-audio-recorder");
 Vue.prototype.Recorder = Recorder;
+const Sha1 = require("sha1");
+Vue.prototype.Sha1 = Sha1;
 
 Vue.use(Element);
 Vue.use(install);

@@ -208,7 +208,9 @@ export default class Change extends Vue {
             mobile: this.ruleForm.username,
             role: 1,
             code: this.ruleForm.code,
-            password: this.ruleForm.password,
+            password: Vue.prototype
+                .Sha1(this.ruleForm.password)
+                .substring(0, 20),
         }).then((res: any) => {
             if (res.data.data.status == 4) {
                 this.$message({

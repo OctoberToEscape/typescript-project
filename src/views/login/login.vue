@@ -258,7 +258,9 @@ export default class login extends Vue {
         passwordLogin({
             mobile: this.ruleForm.username,
             role: 1,
-            password: this.ruleForm.password,
+            password: Vue.prototype
+                .Sha1(this.ruleForm.password)
+                .substring(0, 20),
         }).then((res: any): void => {
             if (res.data.data.status == 2) {
                 this.$message({
