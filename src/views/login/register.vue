@@ -242,7 +242,9 @@ export default class Register extends Vue {
         userRegister({
             mobile: this.ruleForm.username,
             code: this.ruleForm.code,
-            password: this.ruleForm.password,
+            password: Vue.prototype
+                .Sha1(this.ruleForm.password)
+                .substring(0, 20),
             role: this.radio,
         }).then((res: any): void => {
             if (res.data.data.status == 4) {
