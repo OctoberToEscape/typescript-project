@@ -80,7 +80,7 @@
                             ></el-input>
                             <el-input
                                 class="writing-box"
-                                v-else="v-else"
+                                v-else
                                 type="textarea"
                                 :rows="8"
                                 :readonly="
@@ -113,7 +113,7 @@
                 </div>
             </div>
         </div>
-        <div class="tab-content-box" v-else="v-else">
+        <div class="tab-content-box" v-else>
             <empty text="测试题不见了~"></empty>
         </div>
         <el-dialog

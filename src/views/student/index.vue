@@ -7,11 +7,10 @@
                 :class="['caurse-block' + (index + 1)]"
                 :key="index"
             >
-                <span
-                    v-if="c.is_buy === 1"
-                    @click="keepCategoryId(c.id, index)"
-                    >{{ c.title }}</span
-                ><span class="disabled" v-else="v-else">{{ c.title }}</span>
+                <span v-if="c.is_buy === 1" @click="keepCategoryId(c.id, index)"
+                    >{{ c.title }}
+                </span>
+                <span class="disabled" v-else>{{ c.title }}</span>
             </div>
             <div class="caurse-block about-us">
                 <span>
