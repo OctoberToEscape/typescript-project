@@ -48,7 +48,8 @@
                 v-if="stateInfo.is_can_test == 1"
                 @click="goEmit('exam', stateInfo.id, stateInfo.title)"
                 src="@/assets/images/status/exam_sel.png"
-            /><img v-else="v-else" src="@/assets/images/status/exam_no.png" />
+            />
+            <img v-else src="@/assets/images/status/exam_no.png" />
             <div
                 class="status yes-end"
                 v-if="
