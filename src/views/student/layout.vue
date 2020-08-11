@@ -164,15 +164,16 @@ export default class StudentLayout extends Vue {
         .logo {
             display: flex;
             align-items: center;
-            margin-top: 10px;
+            margin-top: 15px;
             cursor: pointer;
             .logo-content {
                 display: flex;
                 align-items: center;
                 .logo-img {
-                    width: 42px;
-                    height: 40px;
+                    width: 29px;
+                    height: 29px;
                     background-image: url(~@/assets/images/logo2.png);
+                    background-size: contain;
                 }
                 h1 {
                     font-size: 22px;
@@ -182,9 +183,16 @@ export default class StudentLayout extends Vue {
                     margin: 0 10px 0 9px;
                 }
                 .back-home {
+                    width: 22px;
+                    height: 22px;
+                    border-radius: 50%;
                     margin-right: 10px;
+                    background: #fff;
+                    text-align: center;
                     img {
-                        margin-top: 6px;
+                        width: 16px;
+                        height: 13px;
+                        margin-top: 4px;
                     }
                 }
             }

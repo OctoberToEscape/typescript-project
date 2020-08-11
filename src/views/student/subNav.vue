@@ -212,6 +212,10 @@ export default class StudentAnvWrap extends Vue {
             }
         }
     }
+    .el-main {
+        padding-bottom: 80px !important;
+        box-sizing: border-box !important;
+    }
 }
 @media screen and (min-width: 1208px) {
     .student-nav-container .student-nav-body {

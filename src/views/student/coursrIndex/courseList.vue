@@ -317,14 +317,16 @@ export default class CourseList extends Vue {
     .link-c {
         position: absolute;
         top: -35px;
-        left: 125px;
-        width: 240px;
+        left: 135px;
+        padding-right: 10px;
         height: 30px;
         font-size: 16px;
         color: #f77a2f;
         line-height: 30px;
         text-decoration: none;
         cursor: pointer;
+        background: #fff;
+        border-radius: 13px;
         img {
             width: 20px;
             height: 20px;
@@ -397,6 +399,7 @@ export default class CourseList extends Vue {
                         overflow: hidden;
                         text-overflow: ellipsis;
                         text-align: center;
+                        color: #63a7f8;
                     }
 
                     .course-box {

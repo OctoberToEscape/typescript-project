@@ -1,5 +1,8 @@
 <template>
-    <div class="page-header">
+    <div
+        class="page-header"
+        :style="{ background: from ? '#63a7f8' : '#99cefa' }"
+    >
         <div class="contral" @click="onBack">
             <img src="@/assets/images/handleback.png" />
             <span>返回{{ backName }}</span>
@@ -29,6 +32,7 @@ export default class extends Vue {
     @Prop({ default: "" }) private title!: string;
     @Prop({ default: true }) private show!: boolean;
     @Prop({ default: false }) private controlShow!: boolean;
+    @Prop({ default: false }) private from!: boolean;
 
     /**
      * @data
@@ -52,7 +56,7 @@ export default class extends Vue {
 .page-header {
     width: 100%;
     height: 50px;
-    background: #63a7f8;
+    // background: #63a7f8;
     padding: 0px 130px;
     box-sizing: border-box;
     min-width: 1200px;

@@ -11,6 +11,7 @@
                 :controlShow="controlShow"
                 @_onBack="onBack"
                 @_onVideoClick="handleControlClick"
+                :from="true"
             />
             <div class="video-box" v-if="videoList.length">
                 <video
