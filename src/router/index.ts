@@ -363,6 +363,62 @@ const routes: Array<RouteConfig> = [
                 ],
             },
             {
+                path: "/student/history",
+                component: () => import("@/views/student/subNav.vue"),
+                redirect: "/student/history/chineseChina",
+                name: "history",
+                children: [
+                    {
+                        path: "chineseChina",
+                        component: () =>
+                            import(
+                                "@/views/student/coursrIndex/courseList.vue"
+                            ),
+                        name: "chineseChina",
+                        meta: {
+                            title: "汉字里的中国",
+                            noCache: true,
+                        },
+                    },
+                    {
+                        path: "poetryChina",
+                        component: () =>
+                            import(
+                                "@/views/student/coursrIndex/courseList.vue"
+                            ),
+                        name: "poetryChina",
+                        meta: {
+                            title: "诗文里的中国",
+                            noCache: true,
+                        },
+                    },
+                    {
+                        path: "briefHistoryChina",
+                        component: () =>
+                            import(
+                                "@/views/student/coursrIndex/courseList.vue"
+                            ),
+                        name: "briefHistoryChina",
+                        meta: {
+                            title: "简明中国史",
+                            noCache: true,
+                        },
+                    },
+                    {
+                        path: "briefHistoryWorld",
+                        component: () =>
+                            import(
+                                "@/views/student/coursrIndex/courseList.vue"
+                            ),
+                        name: "briefHistoryWorld",
+                        meta: {
+                            title: "简明世界史",
+                            noCache: true,
+                        },
+                    },
+                ],
+            },
+            {
                 //写作论坛
                 path: "/student/writing",
                 component: () => import("@/views/student/subNav.vue"),
