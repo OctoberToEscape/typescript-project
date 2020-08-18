@@ -48,7 +48,10 @@
                                     v-for="(c, index) in ele.courses"
                                     :key="index.id"
                                 >
-                                    <CourseItem :inf="c"></CourseItem>
+                                    <CourseItem
+                                        :inf="c"
+                                        @goStudy="goStudy"
+                                    ></CourseItem>
                                 </div>
                                 <i v-for="n in ele.courses.length"></i>
                             </div>
