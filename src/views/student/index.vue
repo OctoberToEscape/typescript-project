@@ -47,6 +47,7 @@ export default class StudentIndex extends Vue {
         "global",
         "studyTour",
         "writing",
+        "history",
     ];
     /**
      * @methods
@@ -133,6 +134,12 @@ export default class StudentIndex extends Vue {
             height: 135px;
             top: 333px;
             left: 562px;
+        }
+        .caurse-block7 {
+            width: 199px;
+            height: 137px;
+            top: 488px;
+            left: 504px;
         }
         .caurse-block.about-us {
             width: 216px;

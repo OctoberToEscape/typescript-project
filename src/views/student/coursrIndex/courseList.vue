@@ -156,6 +156,22 @@ export default class CourseList extends Vue {
             name: "stWithBook",
             type: 10,
         },
+        {
+            name: "chineseChina",
+            type: 11,
+        },
+        {
+            name: "poetryChina",
+            type: 12,
+        },
+        {
+            name: "briefHistoryChina",
+            type: 13,
+        },
+        {
+            name: "briefHistoryWorld",
+            type: 14,
+        },
     ];
 
     mounted() {
@@ -228,6 +244,7 @@ export default class CourseList extends Vue {
     //获取tab下的数据列表
     private getData(): void {
         getCourseData(this.activeTab).then((res: any): void => {
+            console.log(res.data.data);
             this.dataList = res.data.data;
         });
     }
@@ -242,7 +259,6 @@ export default class CourseList extends Vue {
             tab: this.activeTab,
         };
         sessionStorage.sct = JSON.stringify(stObj);
-
         this.$router.push({
             name: val.type,
             query: { id: val.id, title: val.title },

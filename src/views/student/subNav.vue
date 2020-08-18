@@ -161,6 +161,31 @@ export default class StudentAnvWrap extends Vue {
         },
     ];
 
+    private historyNav: Array<{ [key: string]: string | boolean }> = [
+        {
+            url: "/student/history/chineseChina",
+            text: "汉字里的中国",
+            img: require("@/assets/images/subnav-13.png"),
+        },
+        {
+            url: "/student/history/poetryChina",
+            text: "诗文里的中国",
+            img: require("@/assets/images/subnav-14.png"),
+        },
+        {
+            url: "/student/history/briefHistoryChina",
+            text: "简明中国史",
+            img: require("@/assets/images/subnav-15.png"),
+            isLetter: true,
+        },
+        {
+            url: "/student/history/briefHistoryWorld",
+            text: "简明世界史",
+            img: require("@/assets/images/subnav-16.png"),
+            isLetter: true,
+        },
+    ];
+
     mounted() {
         this.category = window.location.href.split("student/")[1].split("/")[0];
         this.activeLink = window.location.pathname;
@@ -182,6 +207,9 @@ export default class StudentAnvWrap extends Vue {
         } else if (this.category === "studyTour") {
             this.navName = "游学";
             this.navList = this.studyTourNav;
+        } else if (this.category == "history") {
+            this.navName = "历史";
+            this.navList = this.historyNav;
         }
         sessionStorage.setItem("sc", this.navName);
     }
