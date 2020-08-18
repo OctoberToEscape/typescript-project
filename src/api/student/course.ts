@@ -1,11 +1,10 @@
 import { service } from "@/utils/request";
 
-export const getTabs = (id: string | null, data: {}): any => {
+export const getTabs = (id: string | null, type: string | number): any => {
     //拿学生端tab数据
     return service({
         method: "get",
-        url: `/category/${id}`,
-        data,
+        url: `/category/${id}?type=${type}`,
     });
 };
 

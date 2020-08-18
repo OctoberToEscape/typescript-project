@@ -215,11 +215,7 @@ export default class CourseList extends Vue {
 
     //获取tab标签内容
     private getNavTab(): void {
-        getTabs(this.categoryId, {
-            params: {
-                type: this.navType,
-            },
-        }).then((res: any): void => {
+        getTabs(this.categoryId, this.navType).then((res: any): void => {
             if (res.data.data.length > 0) {
                 // 是否从测试、听、读写等页返回,切换到指定tab
                 if (sessionStorage.sct) {
