@@ -26,7 +26,6 @@ module.exports = {
                             },
                         },
                     },
-                    // public: "127.0.0.1:8901", // For docker host
                     watchOptions: {
                         poll: true,
                         ignored: /(node_modules|dist|build|vendor|Docker|tests|backup|\.lock|\.git)/,
