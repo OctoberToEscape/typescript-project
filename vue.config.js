@@ -3,7 +3,7 @@ module.exports = {
     outputDir: "dist",
     assetsDir: "static",
     lintOnSave: false,
-    publicPath: "/",
+    publicPath: process.env.NODE_ENV === "production" ? "./" : "/",
     configureWebpack: () => {
         if (process.env.NODE_ENV === "development") {
             return {
@@ -38,34 +38,14 @@ module.exports = {
             };
         } else if (process.env.NODE_ENV === "production") {
             return {
-                devServer: {
-                    // proxy: {
-                    //     "/prodApi": {
-                    //         target: "https://api.chuangwai.xyz/chinese",
-                    //         changeOrigin: true,
-                    //         secure: false,
-                    //         pathRewrite: {
-                    //             "^/prodApi": ""
-                    //         }
-                    //     },
-                    //     "/prodPay": {
-                    //         target: "https://pay.chuangwai.xyz/chinese",
-                    //         changeOrigin: true,
-                    //         secure: false,
-                    //         pathRewrite: {
-                    //             "^/prodPay": ""
-                    //         }
-                    //     }
-                    // },
-                    public: "127.0.0.1:8901", // For docker host
-                    watchOptions: {
-                        poll: true,
-                        ignored: /(node_modules|dist|build|vendor|Docker|tests|backup|\.lock|\.git)/,
+                performance: {
+                    hints: "warning",
+                    maxEntrypointSize: 50000000,
+                    maxAssetSize: 30000000,
+                    assetFilter: (assetFilename) => {
+                        return assetFilename.endsWith(".js");
                     },
-                    disableHostCheck: true,
-                    historyApiFallback: true,
                 },
-                devtool: "source-map",
             };
         }
     },

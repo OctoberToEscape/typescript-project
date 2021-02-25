@@ -1,6 +1,6 @@
 import axios from "axios";
 import router from "@/router/index";
-import { Loading } from "element-ui";
+import { Loading, Message } from "element-ui";
 
 const api = process.env.VUE_APP_BASE_API;
 const payApi = process.env.VUE_APP_PAY_API;
@@ -51,7 +51,6 @@ service.interceptors.response.use(
             }, 500);
         }
         const responseCode = response.status;
-
         //token 过期重新登录
         if (response.data.code == 100401) {
             router.replace({
@@ -69,7 +68,10 @@ service.interceptors.response.use(
         if (loading) {
             loading.close();
         }
-        if (error.response) return Promise.reject(error);
+        if (error.response) {
+            Message.error(error.response.statusText);
+            return Promise.reject(error);
+        }
     }
 );
 
@@ -123,7 +125,10 @@ payService.interceptors.response.use(
         if (loading) {
             loading.close();
         }
-        if (error.response) return Promise.reject(error);
+        if (error.response) {
+            Message.error(error.response.statusText);
+            return Promise.reject(error);
+        }
     }
 );
 export { axios, service, payService };
